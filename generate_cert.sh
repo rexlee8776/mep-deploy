@@ -3,6 +3,9 @@
 CertName=mepserver
 PassWd=te9Fmv%qaq
 
+mkdir ${CertName}
+cd ${CertName}
+
 # generate ca certificate
 openssl genrsa -out ca.key 2048
 openssl req -new -key ca.key -subj /C=CN/ST=Beijing/L=Beijing/O=edgegallery/CN=edgegallery.org -out ca.csr
