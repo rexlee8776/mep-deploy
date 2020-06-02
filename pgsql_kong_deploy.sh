@@ -1,11 +1,23 @@
 #!/bin/bash
 
+# initial variable
+export CertName=mepserver
+CertDir=/tmp/${CertName}
+
 # clean docker 
 docker rm -f kong-service
 docker rm -f postgres-db
 
 # create mep-net network
 docker network create mep-net
+
+cp  ${CertDir}/mepserver_tls.key ${CertDir}/server.key
+cp ${CertDir}/mepserver_tls.crt ${CertDir}/server.crt
+
+chown 999:999 ${CertDir}/server.key
+chmod 600 ${CertDir}/server.key
+chown 999:999 ${CertDir}/server.crt
+chmod 600 ${CertDir}/server.crt
 
 # run postgres db
 docker run -d --name postgres-db \
@@ -14,8 +26,12 @@ docker run -d --name postgres-db \
                 -e "POSTGRES_USER=kong" \
                 -e "POSTGRES_DB=kong" \
                 -e "POSTGRES_PASSWORD=kong" \
-                postgres:12.2
-
+                -v "/tmp/mepserver/server.crt:/var/lib/postgresql/server.crt:ro" \
+                -v "/tmp/mepserver/server.key:/var/lib/postgresql/server.key:ro" \
+                postgres:12.2 \
+                -c ssl=on \
+                -c ssl_cert_file=/var/lib/postgresql/server.crt \
+                -c ssl_key_file=/var/lib/postgresql/server.key
 # inital postgres db
 sleep 5
 docker run --rm \
