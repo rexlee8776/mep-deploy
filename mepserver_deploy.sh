@@ -1,91 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
-cat > /tmp/server.cer << EOF
------BEGIN CERTIFICATE-----
-MIID+TCCAuGgAwIBAgICGO0wDQYJKoZIhvcNAQELBQAwczELMAkGA1UEBhMCQ04x
-EDAOBgNVBAgMB1RpYW5qaW4xEDAOBgNVBAcMB1RpYW5qaW4xFTATBgNVBAoMDENI
-SU5BU1NMIEluYzEpMCcGA1UEAwwgQ0hJTkFTU0wgQ2VydGlmaWNhdGlvbiBBdXRo
-b3JpdHkwHhcNMjAwNTE4MDEyODE5WhcNMjEwNTE4MDEyODE5WjCBizELMAkGA1UE
-BhMCQ04xEDAOBgNVBAgMB1NIQU5OWEkxFDASBgNVBAoMC2VkZ2VnYWxsZXJ5MRQw
-EgYDVQQLDAtlZGdlZ2FsbGVyeTEYMBYGA1UEAwwPZWRnZWdhbGxlcnkub3JnMSQw
-IgYJKoZIhvcNAQkBFhVlZGdlZ2FsbGVyeUBnbWFpbC5jb20wggEiMA0GCSqGSIb3
-DQEBAQUAA4IBDwAwggEKAoIBAQDo6soqCDdh8+GTAQKM/9qpnX263oM/9sowP3lY
-+sFZ0arj0aUn5d5204X6RbdiQzmehU0L4/0FhRItT6AM3BHa6xQczFScD4tbLKv9
-sK7lH0vSD/SrDVtvjQThgb8gRPNd3eDVpewK0WPFxoleoxuh7qondP+YQQ/3DFBr
-Ux4jfSv1jopwhgblUJYDQz6B3JmvuJ4/qXlDibLk6b3GZz1z/FdYyjfH8Ph0SYN0
-6oPyi6UDwzytBQG5RustdrTsK+sGQ/uE4lvktDKv2sNh5bG25ti7Zr3Tb2DgiDDp
-WOg290Ltchn0nd9/xabELGnVu+3q7OmrsQY1kcJ227pnV+Z9AgMBAAGjfjB8MAkG
-A1UdEwQCMAAwLwYJYIZIAYb4QgENBCIWIENISU5BU1NMIENlcnRpZmljYXRpb24g
-QXV0aG9yaXR5MB0GA1UdDgQWBBRYMHljDBFg8uC4dJ4Nzmk4irLGQzAfBgNVHSME
-GDAWgBRcHyP6yOEhMcLYN/aI/NJvwlRDMzANBgkqhkiG9w0BAQsFAAOCAQEAL05u
-vdOpZ35ii7/1q3+GBC2MJVOG9TlwDa3ElRRVBCoPlQcqB9ZDz8PAltm1S+PuVu+n
-cPmuIfKS1IM3ocZVhwMSF5y2x8soe8Wyf5X1VJQqSk18jtFaVrh96puqMJ/6n1mv
-E55ME1LrYgg2KYq4IpWXw6zqIONJOQDBg+ttOTBDkENUTCJ0IYtiKysBN6AJ5H6s
-5XeY0q0UAPrp0v1VtqMgBixxjbpvDy1FXAKUJIIUMed5Dwyz7W2YAGQ16KjR6AzF
-2EJmmvdNSyhjIT5cP5g3vBvOAfsRUKSq/dyNH/JxGSXZASTrQbJzBc/+UbFdtjXK
-EPt8eZ+qS6ngJys+2g==
------END CERTIFICATE-----
-EOF
+# initial variable
+export CertName=mepserver
+CertDir=/tmp/${CertName}
 
-cat > /tmp/server_key.pem << EOF
------BEGIN PRIVATE KEY-----
-MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDo6soqCDdh8+GT
-AQKM/9qpnX263oM/9sowP3lY+sFZ0arj0aUn5d5204X6RbdiQzmehU0L4/0FhRIt
-T6AM3BHa6xQczFScD4tbLKv9sK7lH0vSD/SrDVtvjQThgb8gRPNd3eDVpewK0WPF
-xoleoxuh7qondP+YQQ/3DFBrUx4jfSv1jopwhgblUJYDQz6B3JmvuJ4/qXlDibLk
-6b3GZz1z/FdYyjfH8Ph0SYN06oPyi6UDwzytBQG5RustdrTsK+sGQ/uE4lvktDKv
-2sNh5bG25ti7Zr3Tb2DgiDDpWOg290Ltchn0nd9/xabELGnVu+3q7OmrsQY1kcJ2
-27pnV+Z9AgMBAAECggEAbgC1ijRnM7PjDXKkqcMMmp7vCpqcklEUHMVdolCLkMgd
-VYtl3PoLn0M3O4RBn/7v75Y1VTBQB5NZilzY0jn9lM8BqLg4HZyZzG3ErQQNFdk6
-DfPLMh4U2RJZA8grZCosZmCsFztNx64s2PNzXWbbXhdB9XCkZlwUFjGSqZ2P1mIY
-/NLJ1OO2xNCswl0PSM4pZyxifL5t1WVqPfu4cgjolEOdWh9ys0U4eBjS4HJs5J4g
-m1IYZEQGTnoTHfgB1fVYmUn+giFnIwrbaCNLk6HbuH+5geOUtgDn1Pz+cLRAUHnS
-peJ2sbv1lns3X+3XUZ05dUKJ0Jc0CWT379UJquHqYQKBgQD3Ud1X20mr/+u5RKqO
-DndRTBR3t0x/mh2iQpypnCUA6H/AY1Zapt4/j2gZ+HFQrsnmAMhp05lxyFaEMEcO
-a2w09gzjDnMcL1veDa/54UK0v2Hou4EgXYFzPU/1rjuRUdRqy9qCj8IXkZeab9iy
-QqAj8SnjK2QT2YnHgGdT8AZIcwKBgQDxF4TxaUFJjlKnQah9UkRhKF+4WvcOifdI
-hFgkQyBWX5VSoIVKvtDa7RMUL734QGxp6LBr10Qr8TNZn3fGJcarr7jqtQd9ExZP
-DPirAiWKeoBa+m3dTHZh6Q1TqmKbmntqfraFB/Aqf72VARysIdv6hYohI/0+UHGS
-YRMfVlaJTwKBgQDtvAatjkA6Es5vj772wJcXUa+XCF6DhgyYTbm0HEFBpzwuHg8D
-IsYeiOZDmJqsOOggrH35pAoq4q2vcYzMIpyoKCBpHhmubSO8xqFy7IKnphQimCLe
-jqOBt90lx27BGMy8P+pyeGfVKgF11a+SYxL2mbpvAOW5YvHbEOXCPMZ9WwKBgQDe
-iGMBobHNfzzzfTtUUbckJuwTcoNQPDCwEth4wCz9DMT7u4bM80w8h09w9pBWsMBh
-EZKmN9CI7t4C/5rCnuO+XThGDEqZPCD/Xm25CwYzx9bqIvV9qrIqtb7DVyYlknYQ
-Wl2GdUlNMROAkcIxcB9oIhLZfCqodgAeqNPJvRurKQKBgBQFZ5A6NyjRi9nmYwKF
-VV5dMMtE666tzlcHE/2bUROkhchLul1XG7YE6f6ljOam26nAwgUZvzauQw1JytDt
-MwQoS/eiwcAwpKupsd9SR0iphjwLh6zRlOuif7XCo5L9Rte1h5PvO97B78UBgR68
-sr/WLESnO3d+fhXmJmCdOF28
------END PRIVATE KEY-----
-EOF
+# clean docker and certs
+docker rm -f mepserver
+rm -rf ${CertDir}
 
-cat > /tmp/trust.cer << EOF
------BEGIN CERTIFICATE-----
-MIIDuTCCAqGgAwIBAgIJAPIdJb0RdwhzMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNV
-BAYTAkNOMRAwDgYDVQQIDAdUaWFuamluMRAwDgYDVQQHDAdUaWFuamluMRUwEwYD
-VQQKDAxDSElOQVNTTCBJbmMxKTAnBgNVBAMMIENISU5BU1NMIENlcnRpZmljYXRp
-b24gQXV0aG9yaXR5MB4XDTE2MDgyNjAyMzAzM1oXDTQ0MDQxNjAyMzAzM1owczEL
-MAkGA1UEBhMCQ04xEDAOBgNVBAgMB1RpYW5qaW4xEDAOBgNVBAcMB1RpYW5qaW4x
-FTATBgNVBAoMDENISU5BU1NMIEluYzEpMCcGA1UEAwwgQ0hJTkFTU0wgQ2VydGlm
-aWNhdGlvbiBBdXRob3JpdHkwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB
-AQCvFNsKGlWA/z7s1ci0QkzoACs2KlUFvERoSSDl74iDgRrRgzTqNznZG4zPxUmV
-0IjkCo6d297Sn3pZa+Tjj+HvyzqJg72N2jf0ToCbLxvA+NsnPCHjKk52R4jA6f+s
-GdGw25xe1KSVU7FUOPYGpbkG+K7HHZ+MBCskutjtbvbVR85axy7dzm5R5Xtah2HC
-783azeicJN7hmVNEeXVzOujz0AQVvMUG6Q4QxUurwcmMnzN9H2XVCv287drtfzdr
-PBudLfkpnJ/FADQ2UbeDmAdnYwnzaSmO93V6N64QhLr4oXW8qpld2BMEV4+D/Sr2
-4Vg+cFLAgBTWuAItCGSwCZjBAgMBAAGjUDBOMB0GA1UdDgQWBBRcHyP6yOEhMcLY
-N/aI/NJvwlRDMzAfBgNVHSMEGDAWgBRcHyP6yOEhMcLYN/aI/NJvwlRDMzAMBgNV
-HRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQB98HrVG+xDsOqN5r8jQ1YvFh+4
-fdWnkesr4quE/hNdTAfUqGcim3pX8g/NBXwk+YnKEcS0d+gwG8uDPZpDTuDZhyg4
-SD4CniuLS8XDeg8xTqCwiD1pB9CP6xm5RUWw+mt2VSNeq85rKBw5rJQzLOSghk8x
-EH8Fek0tbrpCwEi3ES8qywqD3QCZ3WXRMvusYG2HrSSoavWqvaaE7Zo/0p4KTwI/
-ylbQIj7lgIb4hK2jknKqK2PO08r6TtFYBsaR/ciL99LUsbzwlgHPmCGzpzILRAyq
-UyOs7q0PGep+9q2Gq4tMIVx64Ny/6aBaumLKFLoduutIH5rUzafaR4bNHeiK
------END CERTIFICATE-----
-EOF
+# generate certificates
+./generate_cert.sh
+chmod o+r ${CertDir}/*
 
-
+# run mepserver docker
 docker run -itd --name mepserver -p 30188:8088 -e "SSL_ROOT=/etc/mepssl" -e "MEP_SSL_MODE=1" \
-                                 -v /tmp/server.cer:/etc/mepssl/server.cer \
-                                 -v /tmp/server_key.pem:/etc/mepssl/server_key.pem \
-                                 -v /tmp/trust.cer:/etc/mepssl/trust.cer \
+                                 -v ${CertDir}/mepserver_tls.crt:/etc/mepssl/server.cer \
+                                 -v ${CertDir}/mepserver_encryptedtls.key:/etc/mepssl/server_key.pem \
+                                 -v ${CertDir}/ca.crt:/etc/mepssl/trust.cer \
+                                 -v ${CertDir}/mepserver_cert_pwd:/etc/mepssl/cert_pwd \
                                  edgegallery/mep:latest
+# check mepserver state
+sleep 1
+docker ps -a | grep mepserver

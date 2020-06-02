@@ -1,10 +1,10 @@
-#!bin/bash
+#!/bin/bash
 
-CertName=mepserver
+CertName=${CertName:-mepserver}
 PassWd=te9Fmv%qaq
-
-mkdir ${CertName}
-cd ${CertName}
+CertDir=/tmp/${CertName}
+mkdir ${CertDir}
+cd ${CertDir}
 
 # generate ca certificate
 openssl genrsa -out ca.key 2048
