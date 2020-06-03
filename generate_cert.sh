@@ -9,7 +9,7 @@ cd ${CertDir}
 
 # generate ca certificate
 openssl genrsa -out ca.key 2048
-openssl req -new -key ca.key -subj /C=CN/ST=Beijing/L=Beijing/O=edgegallery/CN=edgegallery.org -out ca.csr
+openssl req -new -key ca.key -subj /C=CN/ST=Peking/L=Beijing/O=edgegallery/CN=edgegallery.org -out ca.csr
 openssl x509 -req -days 365 -in ca.csr -extensions v3_ca -signkey ca.key -out ca.crt
 
 # generate tls certificate
