@@ -28,7 +28,7 @@ docker run -itd --name mepauth -p 30080:8080 -p 10443:10443\
              -e "MEPAUTH_APIGW_HOST=kong-service" \
              -e "MEPAUTH_APIGW_PORT=8444"  \
              -e "MEPAUTH_DB_SSLMODE=verify-ca" \
-             edgegallery/mepauth:latest
+             rexlee8776/mepauth:latest $*
 
 
 # check mepauth docker status

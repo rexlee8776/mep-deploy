@@ -8,7 +8,7 @@ set -x
 
 ./pgsql_kong_deploy.sh
 
-./mepauth_deploy.sh
+./mepauth_deploy.sh -u kong -p kong
 
 ./mepserver_deploy.sh
 
