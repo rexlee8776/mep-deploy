@@ -4,17 +4,22 @@ docker rm -f mepauth
 # initial variable
 export CertName=mepserver
 CertDir=/tmp/${CertName}
+MepauthConf=/usr/mepauth/conf
 
 chmod o+r ${CertDir}/*
 chmod og-rwx ${CertDir}/ca.crt
+chmod o+r ${CertDir}/ca.crt
 
 docker run -itd --name mepauth -p 30080:8080 -p 10443:10443\
              --network mep-net \
              --link postgres-db:postgres-db \
              --link kong-service:kong-service \
-             -v /tmp/publickey:/usr/mepauth/publickey \
-             -v /tmp/privatekey:/usr/mepauth/privatekey \
-             -v /tmp/mepserver/ca.crt:/usr/mepauth/conf/ca.crt \
+             -v ${CertDir}/jwt_publickey:${MepauthConf}/jwt_publickey \
+             -v ${CertDir}/jwt_encrypted_privatekey:${MepauthConf}/jwt_encrypted_privatekey \
+             -v ${CertDir}/mepserver_tls.crt:${MepauthConf}/server.crt \
+             -v ${CertDir}/mepserver_encryptedtls.key:${MepauthConf}/encryptedServer.key \
+             -v ${CertDir}/mepserver_cert_pwd:${MepauthConf}/plain_pwd_file \
+             -v ${CertDir}/ca.crt:${MepauthConf}/ca.crt \
              -e "MEPAUTH_DB_NAME=kong" \
              -e "MEPAUTH_DB_USER=kong" \
              -e "MEPAUTH_DB_PASSWD=kong" \
@@ -25,3 +30,7 @@ docker run -itd --name mepauth -p 30080:8080 -p 10443:10443\
              -e "MEPAUTH_DB_SSLMODE=verify-ca" \
              edgegallery/mepauth:latest
 
+
+# check mepauth docker status
+sleep 1
+docker ps -a |grep mepauth
