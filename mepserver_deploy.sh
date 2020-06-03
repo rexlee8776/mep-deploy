@@ -6,11 +6,6 @@ CertDir=/tmp/${CertName}
 
 # clean docker and certs
 docker rm -f mepserver
-rm -rf ${CertDir}
-
-# generate certificates
-./generate_cert.sh
-chmod o+r ${CertDir}/*
 
 # run mepserver docker
 docker run -itd --name mepserver -p 30188:8088 -e "SSL_ROOT=/etc/mepssl" -e "MEP_SSL_MODE=1" \

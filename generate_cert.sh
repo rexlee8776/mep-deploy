@@ -29,3 +29,5 @@ openssl rsa -in jwt_privatekey -aes256 -passout pass:${PassWd} -out jwt_encrypte
 # generate aes key file
 echo -n ${AesKey} > aes_key_file
 
+# setup read permission
+chmod o+r ${CertDir}/*
