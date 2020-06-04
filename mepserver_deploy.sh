@@ -14,6 +14,7 @@ docker run -itd --name mepserver -p 127.0.0.1:30188:8088 -e "SSL_ROOT=/etc/mepss
                                  -v ${CertDir}/ca.crt:/etc/mepssl/trust.cer \
                                  -v ${CertDir}/mepserver_cert_pwd:/etc/mepssl/cert_pwd \
                                  edgegallery/mep:latest
+
 # check mepserver state
 sleep 1
 docker ps -a | grep mepserver
