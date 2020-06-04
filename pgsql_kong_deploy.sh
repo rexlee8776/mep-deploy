@@ -11,13 +11,16 @@ docker rm -f postgres-db
 # create mep-net network
 docker network create mep-net
 
-cp  ${CertDir}/mepserver_tls.key ${CertDir}/server.key
+cp ${CertDir}/mepserver_tls.key ${CertDir}/server.key
 cp ${CertDir}/mepserver_tls.crt ${CertDir}/server.crt
 
 chown 999:999 ${CertDir}/server.key
 chmod 600 ${CertDir}/server.key
 chown 999:999 ${CertDir}/server.crt
 chmod 600 ${CertDir}/server.crt
+
+chmod og-rwx ${CertDir}/ca.crt
+chmod o+r ${CertDir}/ca.crt
 
 # run postgres db
 docker run -d --name postgres-db \
@@ -48,6 +51,7 @@ sleep 5
 docker run -d --name kong-service \
     --link postgres-db:postgres-db \
     --network=mep-net \
+    -v ${CertDir}/ca.crt:/run/kongssl/ca.crt \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
@@ -57,6 +61,9 @@ docker run -d --name kong-service \
     -e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
     -e "KONG_ADMIN_ERROR_LOG=/dev/stderr" \
     -e "KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl" \
+    -e "KONG_PG_SSL=on" \
+    -e "KONG_PG_SSL_VERIFY=on" \
+    -e "KONG_LUA_SSL_TRUSTED_CERTIFICATE=/run/kongssl/ca.crt" \
     -p 8443:8443 \
     -p 8444:8444 \
     kong:1.5.1-alpine
