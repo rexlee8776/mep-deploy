@@ -13,3 +13,4 @@ set -x
 ./mepserver_deploy.sh
 
 ./check_env_status.sh
+
