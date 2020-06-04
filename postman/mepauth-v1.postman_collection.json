@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "5e91e51a-ca38-4de3-9573-ba496f566433",
+		"name": "mepauth-v1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "kong add a service",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"url\": \"https://159.138.1.75:30188\",\n\t\"name\": \"https-mp1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{KONG_HOST}}:{{KONG_PORT}}/services",
+					"protocol": "https",
+					"host": [
+						"{{KONG_HOST}}"
+					],
+					"port": "{{KONG_PORT}}",
+					"path": [
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "kong add a route",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"paths\": [\"/mepssl\"],\n\t\"name\": \"mepssl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{KONG_HOST}}:{{KONG_PORT}}/services/https-mp1/routes",
+					"protocol": "https",
+					"host": [
+						"{{KONG_HOST}}"
+					],
+					"port": "{{KONG_PORT}}",
+					"path": [
+						"services",
+						"https-mp1",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "kong add service jwt plugin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"jwt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{KONG_HOST}}:{{KONG_PORT}}/services/https-mp1/plugins",
+					"protocol": "https",
+					"host": [
+						"{{KONG_HOST}}"
+					],
+					"port": "{{KONG_PORT}}",
+					"path": [
+						"services",
+						"https-mp1",
+						"plugins"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generator to push aksk",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"authInfo\":\n\t{\n\t\t\"credentials\": {\n\t\t\t\"accessKeyId\": \"vm1gFjb+eXFL6VVSSQPZiBfmSoo=\",\n\t\t\t\"secretKey\": \"DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOI/RomRs5wyszoCR5R7A==\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{MEP_HOST}}:{{MEPAUTH_PORT}}/mepauth/v1/applications/79cbac9e-3e0e-4b5e-bfc2-1d3b20e3d1c8/confs",
+					"protocol": "https",
+					"host": [
+						"{{MEP_HOST}}"
+					],
+					"port": "{{MEPAUTH_PORT}}",
+					"path": [
+						"mepauth",
+						"v1",
+						"applications",
+						"79cbac9e-3e0e-4b5e-bfc2-1d3b20e3d1c8",
+						"confs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "apply for a real token",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "SDK-HMAC-SHA256 Access=vm1gFjb+eXFL6VVSSQPZiBfmSoo=, SignedHeaders=content-type;host;x-sdk-date, Signature=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+						"description": "$AccessKeyID is ak value\n$Signature is generate with sk and date and other things\n",
+						"type": "text"
+					},
+					{
+						"key": "x-sdk-date",
+						"value": "20060102T150405Z",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "127.0.0.1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{MEP_HOST}}:{{MEPAUTH_PORT}}/mepauth/v1/token",
+					"protocol": "https",
+					"host": [
+						"{{MEP_HOST}}"
+					],
+					"port": "{{MEPAUTH_PORT}}",
+					"path": [
+						"mepauth",
+						"v1",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"disabled": true
+						},
+						{
+							"key": "client_id",
+							"value": "s6BhdRkqt3",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "7Fjfp0ZBr1KtDRbnfVdmIw",
+							"disabled": true
+						}
+					]
+				},
+				"description": "result:\r\n{\r\n    \"access_token\": \"mF_9.B5f-4.1JqM\",\r\n    \"token_type\": \"Bearer\",\r\n    \"expires_in\": 3600,\r\n    \"public_key\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsOhMFz3x6kUddhlgF78j2dCDHpUaWgKcTQmnh++v/at9wAvOo9De2dDnPXQzm/cebff6hwKyV4LY66/+Pg5ikPvlmG9KXuJEzwXYUODQBzalCjlBzN2p1355FmsAWWEljwL0ncmmm67oetw/1RiB9ueROdzuF8zUnuo0YrvswjWHchI+2Z3QS9KXuYNmotIzwTyWdY2H7nyNV3t10CDsipT0ckrzB2kErUSANob1w8lt0pIefXIeiAHQprIJ7a6TD8vc7IvDUaQ/1ANTigskJJ5xq6gXQgFT4e07jPVn/bRMshbiw4+2JaljTqGykmSH8El3qC9ZyeHBiGJz6BDVCQIDAQAB\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "check mp1 services with jwt token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTExNzA5MjAsImlzcyI6Im1lcGF1dGgiLCJzdWIiOiI3OWNiYWM5ZS0zZTBlLTRiNWUtYmZjMi0xZDNiMjBlM2QxYzgifQ.rRoGhHTBIq2_q15Y3pgtuYSZcDxFbT-f686KSeAFEi3ms5tnfAP4jAikCjUvKX71N4dfB5gq_J1VoTM3sve5opJgUXdADz3TAdiFz04FbCKKd_YBMk1MyxwHhhnDnyVT3dlGZuvLRK3huQS648YbqQYBxxc3vz3D1SXKpQ9yKcyP5Nmr-2KMVXqAxqAXvxVNbY1yRJHtzVgQRKpdFuGsR8o0cu4rIDd9_F8H897qoGP9z_tSvLZc0f5q2dki_2eKTAkzjkMNbA3sYzDYPNR7RdY8CH0CdPYL4CpC9NXGB20TMqgZVSdScokzo0OAUgtAHp1qCtiaEFfQLtU4njuIOA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{KONG_HOST}}:{{KONG_PROXY}}/mepssl/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services",
+					"protocol": "http",
+					"host": [
+						"{{KONG_HOST}}"
+					],
+					"port": "{{KONG_PROXY}}",
+					"path": [
+						"mepssl",
+						"mep",
+						"mec_service_mgmt",
+						"v1",
+						"applications",
+						"5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"services"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
