@@ -4,4 +4,3 @@ docker rm -f mepauth
 docker rm -f kong-service
 docker rm -f postgres-db
 docker network rm mep-net
-rm -rf /tmp/mepserver

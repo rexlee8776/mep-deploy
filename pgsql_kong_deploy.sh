@@ -11,10 +11,6 @@ docker rm -f postgres-db
 # create mep-net network
 docker network create mep-net
 
-mkdir -p ${DataDir}
-chown eguser:eggroup ${DataDir}
-chmod 700 ${DataDir}
-
 # run postgres db
 docker run -d --name postgres-db \
                 -p 5432:5432 \
