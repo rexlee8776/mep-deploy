@@ -4,7 +4,7 @@ CertName=${CertName:-mepserver}
 PassWd=te9Fmv%qaq
 AesKey=te9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaq
 CertDir=/tmp/${CertName}
-mkdir ${CertDir}
+
 cd ${CertDir}
 
 # generate ca certificate
@@ -30,5 +30,5 @@ openssl rsa -in jwt_privatekey -aes256 -passout pass:${PassWd} -out jwt_encrypte
 echo -n ${AesKey} > aes_key_file
 
 # setup read permission
-chown -R eguser:eggroup ${CertDir}
-chmod -R 600 ${CertDir}
+chown eguser:eggroup ${CertDir}/*
+chmod 600 ${CertDir}/*
