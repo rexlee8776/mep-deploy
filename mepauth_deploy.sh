@@ -10,7 +10,7 @@ chmod o+r ${CertDir}/*
 chmod og-rwx ${CertDir}/ca.crt
 chmod o+r ${CertDir}/ca.crt
 
-docker run -itd --name mepauth -p 30080:8080 -p 10443:10443\
+docker run -itd --name mepauth -p 127.0.0.1:30080:8080 -p 10443:10443\
              --network mep-net \
              --link postgres-db:postgres-db \
              --link kong-service:kong-service \
@@ -28,7 +28,7 @@ docker run -itd --name mepauth -p 30080:8080 -p 10443:10443\
              -e "MEPAUTH_APIGW_HOST=kong-service" \
              -e "MEPAUTH_APIGW_PORT=8444"  \
              -e "MEPAUTH_DB_SSLMODE=verify-ca" \
-             rexlee8776/mepauth:latest $*
+             edgegallery/mepauth:latest $*
 
 
 # check mepauth docker status
