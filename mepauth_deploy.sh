@@ -6,10 +6,6 @@ export CertName=mepserver
 CertDir=/tmp/${CertName}
 MepauthConf=/usr/mepauth/conf
 
-chmod o+r ${CertDir}/*
-chmod og-rwx ${CertDir}/ca.crt
-chmod o+r ${CertDir}/ca.crt
-
 docker run -itd --name mepauth -p 127.0.0.1:30080:8080 -p 10443:10443\
              --network mep-net \
              --link postgres-db:postgres-db \
