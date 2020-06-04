@@ -13,8 +13,7 @@ docker run -itd --name mepauth -p 127.0.0.1:30080:8080 -p 10443:10443\
              -v ${CertDir}/jwt_publickey:${MepauthConf}/jwt_publickey \
              -v ${CertDir}/jwt_encrypted_privatekey:${MepauthConf}/jwt_encrypted_privatekey \
              -v ${CertDir}/mepserver_tls.crt:${MepauthConf}/server.crt \
-             -v ${CertDir}/mepserver_encryptedtls.key:${MepauthConf}/encryptedServer.key \
-             -v ${CertDir}/mepserver_cert_pwd:${MepauthConf}/plain_pwd_file \
+             -v ${CertDir}/mepserver_tls.key:${MepauthConf}/server.key \
              -v ${CertDir}/ca.crt:${MepauthConf}/ca.crt \
              -e "MEPAUTH_DB_NAME=kong" \
              -e "MEPAUTH_DB_USER=kong" \
