@@ -98,4 +98,4 @@ docker run -d --name kong-service \
 
 
 # check docker status
-docker ps -a |grep -E '(postgres-db|edgegallery.org)'
+docker ps -a |grep -E '(postgres-db|kong-service)'
