@@ -30,4 +30,5 @@ openssl rsa -in jwt_privatekey -aes256 -passout pass:${PassWd} -out jwt_encrypte
 echo -n ${AesKey} > aes_key_file
 
 # setup read permission
-chmod o+r ${CertDir}/*
+chown -R eguser:eggroup ${CertDir}
+chmod -R 600 ${CertDir}

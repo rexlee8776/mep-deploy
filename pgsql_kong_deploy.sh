@@ -3,7 +3,7 @@
 # initial variable
 export CertName=mepserver
 CertDir=/tmp/${CertName}
-
+DataDir=/data/mep
 # clean docker 
 docker rm -f kong-service
 docker rm -f postgres-db
@@ -11,13 +11,9 @@ docker rm -f postgres-db
 # create mep-net network
 docker network create mep-net
 
-cp ${CertDir}/mepserver_tls.key ${CertDir}/server.key
-cp ${CertDir}/mepserver_tls.crt ${CertDir}/server.crt
-
-chown 999:999 ${CertDir}/server.key
-chmod 600 ${CertDir}/server.key
-chown 999:999 ${CertDir}/server.crt
-chmod 600 ${CertDir}/server.crt
+mkdir -p ${DataDir}
+chown eguser:eggroup ${DataDir}
+chmod 700 ${DataDir}
 
 chmod og-rwx ${CertDir}/ca.crt
 chmod o+r ${CertDir}/ca.crt
@@ -25,12 +21,15 @@ chmod o+r ${CertDir}/ca.crt
 # run postgres db
 docker run -d --name postgres-db \
                 -p 5432:5432 \
+                --user=166:166 \
                 --network=mep-net \
                 -e "POSTGRES_USER=kong" \
                 -e "POSTGRES_DB=kong" \
                 -e "POSTGRES_PASSWORD=kong" \
-                -v "/tmp/mepserver/server.crt:/var/lib/postgresql/server.crt:ro" \
-                -v "/tmp/mepserver/server.key:/var/lib/postgresql/server.key:ro" \
+                -e "PGDATA=/var/lib/postgresql/data/pgdata" \
+                -v "${DataDir}:/var/lib/postgresql/data" \
+                -v "${CertDir}/mepserver_tls.crt:/var/lib/postgresql/server.crt" \
+                -v "${CertDir}/mepserver_tls.key:/var/lib/postgresql/server.key" \
                 postgres:12.2 \
                 -c ssl=on \
                 -c ssl_cert_file=/var/lib/postgresql/server.crt \
@@ -38,6 +37,7 @@ docker run -d --name postgres-db \
 # inital postgres db
 sleep 5
 docker run --rm \
+    --user=166:166 \
     --link postgres-db:postgres-db \
     --network=mep-net \
     -e "KONG_DATABASE=postgres" \
@@ -49,6 +49,7 @@ docker run --rm \
 # run kong service
 sleep 5
 docker run -d --name kong-service \
+    --user=166:166 \
     --link postgres-db:postgres-db \
     --network=mep-net \
     -v ${CertDir}/ca.crt:/run/kongssl/ca.crt \
@@ -64,6 +65,8 @@ docker run -d --name kong-service \
     -e "KONG_PG_SSL=on" \
     -e "KONG_PG_SSL_VERIFY=on" \
     -e "KONG_LUA_SSL_TRUSTED_CERTIFICATE=/run/kongssl/ca.crt" \
+    -e "KONG_PREFIX=/var/lib/kong/data/kongdata" \
+    -v "${DataDir}:/var/lib/kong/data" \
     -p 8443:8443 \
     -p 8444:8444 \
     kong:1.5.1-alpine
