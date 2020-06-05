@@ -6,7 +6,7 @@ export CertName=mepserver
 CertDir=/tmp/${CertName}
 MepauthConf=/usr/mepauth/conf
 
-docker run -itd --name mepauth -p 127.0.0.1:30080:8080 -p 10443:10443\
+docker run -itd --name mepauth -p 127.0.0.1:10443:10443\
              --network mep-net \
              --link postgres-db:postgres-db \
              --link kong-service:kong-service \
