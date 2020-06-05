@@ -1,0 +1,292 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MEP",
+		"_postman_id": "2ce240d3-3dd3-47d1-dc46-0450aa6c7a12",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DNS_SER_Get_all",
+			"request": {
+				"url": "http://localhost:8080/mep/dns_server_mgmt/v1/rrecords",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DNS_SER_Post",
+			"request": {
+				"url": "http://localhost:8080/mep/dns_server_mgmt/v1/rrecord",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"zone\": \".\",\n    \"rr\": [\n      {\n        \"name\": \"www.example.com.\",\n        \"type\": \"A\",\n        \"class\": \"IN\",\n        \"ttl\": 30,\n        \"rData\": [\n          \"172.168.15.100\"\n        ]\n      },\n      {\n        \"name\": \"www.example1.com.\",\n        \"type\": \"A\",\n        \"class\": \"IN\",\n        \"ttl\": 30,\n        \"rData\": [\n          \"172.168.15.49\", \"172.168.15.50\", \"172.168.15.51\"\n        ]\n      }\n    ]\n  }\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DNS_SER_GET_One",
+			"request": {
+				"url": "http://localhost:8080/mep/dns_server_mgmt/v1/rrecord/www.example.com./A",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DNS_SER_Put",
+			"request": {
+				"url": "http://localhost:8080/mep/dns_server_mgmt/v1/rrecord",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"zone\": \".\",\n    \"rr\": [\n      {\n        \"name\": \"www.example.com.\",\n        \"type\": \"A\",\n        \"class\": \"IN\",\n        \"ttl\": 30,\n        \"rData\": [\n          \"172.168.15.101\"\n        ]\n      }\n    ]\n  }\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DNS_SER_Delete",
+			"request": {
+				"url": "http://localhost:8080/mep/dns_server_mgmt/v1/rrecord/www.example.com./A",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MEP_DNS_PUT",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/dns_rules",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dnsRuleId\": \"dnsRule1\",\n    \"domainName\": \"www.example.com\",\n    \"ipAddressType\": \"IP_V6\",\n    \"ipAddress\": \"192.0.2.0\",\n    \"ttl\": 30,\n    \"state\": \"ACTIVE\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MEP_DNS_POST",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/dns_rules",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"domainName\": \"www.example.com\",\n    \"ipAddressType\": \"IP_V4\",\n    \"ipAddress\": \"192.0.2.0\",\n    \"ttl\": 30,\n    \"state\": \"ACTIVE\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MEP_DNS_DELETE",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/dns_rules/35987122-3297-4edb-a761-c67aeb72b38b",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MEP_DNS_GET_ALL",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/dns_rules",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MEP_DNS_GET_ONE",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/dns_rules/001dbfd4-c115-4813-a9f4-36af94565c50",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MEP_DNS_GET_UPDATE",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/dns_rules/35987122-3297-4edb-a761-c67aeb72b38b",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "If-Match",
+						"value": "\"c78e01ea1f8f618d4f5d4e8040cb73b4a3f3029c\"",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dnsRuleId\": \"35987122-3297-4edb-a761-c67aeb72b38b\",\n    \"domainName\": \"www.example.com\",\n    \"ipAddressType\": \"IP_V4\",\n    \"ipAddress\": \"192.0.2.0\",\n    \"ttl\": 30,\n    \"state\": \"INACTIVE\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TRAF_POST",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/traffic_rules",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n    \"filterType\": \"FLOW\",\n    \"priority\": 1,\n    \"trafficFilter\": [\n      {\n        \"srcAddress\": [\n          \"192.168.1.1\"\n        ],\n        \"dstAddress\": [\n          \"192.168.1.1\"\n        ],\n        \"srcPort\": [\n          \"8080\"\n        ],\n        \"dstPort\": [\n          \"8080\"\n        ],\n        \"protocol\": [\n          \"?\"\n        ],\n        \"token\": [\n          \"?\"\n        ],\n        \"srcTunnelAddress\": [\n          \"?\"\n        ],\n        \"tgtTunnelAddress\": [\n          \"?\"\n        ],\n        \"srcTunnelPort\": [\n          \"?\"\n        ],\n        \"dstTunnelPort\": [\n          \"?\"\n        ],\n        \"qCI\": 1,\n        \"dSCP\": 0,\n        \"tC\": 1\n      }\n    ],\n    \"action\": \"DROP\",\n    \"dstInterface\": {\n      \"interfaceType\": \"TUNNEL\",\n      \"tunnelInfo\": {\n        \"tunnelType\": \"GTP_U\",\n        \"tunnelDstAddress\": \"?\",\n        \"tunnelSrcAddress\": \"?\"\n      },\n      \"srcMacAddress\": \"02-00-00-00-00-00\",\n      \"dstMacAddress\": \"02-00-00-00-00-00\",\n      \"dstIpAddress\": \"192.0.2.0\"\n    },\n    \"state\": \"ACTIVE\"\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TRAF_GEL_ALL",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/traffic_rules",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TRAF_GEL_ONE",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/traffic_rules/01643118-5ff2-4f9f-9cc4-e6f8758857f6",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TRAF_PUT_ONE",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/traffic_rules/01643118-5ff2-4f9f-9cc4-e6f8758857f6",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"trafficRuleId\": \"01643118-5ff2-4f9f-9cc4-e6f8758857f6\",\n    \"filterType\": \"FLOW\",\n    \"priority\": 3\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TRAF_DEL",
+			"request": {
+				"url": "http://localhost:8088/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/traffic_rules/72479e78-0e1a-4f21-b1ae-925c8bc3c9ee",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
