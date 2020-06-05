@@ -33,7 +33,7 @@ DROP DATABASE template1;
 EOF
 
 chown eguser:eggroup ${CertDir}/init.sql
-chown 600 ${CertDir}/init.sql
+chmod 600 ${CertDir}/init.sql
 
 # create mep-net network
 docker network create mep-net
