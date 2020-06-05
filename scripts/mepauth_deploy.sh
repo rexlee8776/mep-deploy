@@ -5,8 +5,9 @@ docker rm -f mepauth
 export CertName=mepserver
 CertDir=/tmp/${CertName}
 MepauthConf=/usr/mepauth/conf
+DOMAIN_NAME=edgegallery.org
 
-docker run -itd --name mepauth -p 127.0.0.1:10443:10443\
+docker run -itd --name mepauth -p 10443:10443\
              --network mep-net \
              --link postgres-db:postgres-db \
              --link kong-service:kong-service \
@@ -24,4 +25,5 @@ docker run -itd --name mepauth -p 127.0.0.1:10443:10443\
              -e "MEPAUTH_APIGW_HOST=kong-service" \
              -e "MEPAUTH_APIGW_PORT=8444"  \
              -e "MEPAUTH_DB_SSLMODE=verify-ca" \
+             -e "MEPAUTH_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
              edgegallery/mepauth:latest $*

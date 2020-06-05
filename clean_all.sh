@@ -1,4 +1,5 @@
 #!/bin/bash
+
 docker rm -f mepserver
 docker rm -f mepauth
 docker rm -f kong-service
