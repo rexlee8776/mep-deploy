@@ -20,12 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{KONG_HOST}}:{{KONG_PORT}}/services",
+					"raw": "https://{{KONG_HOST}}:{{KONG_ADMIN_SSL}}/services",
 					"protocol": "https",
 					"host": [
 						"{{KONG_HOST}}"
 					],
-					"port": "{{KONG_PORT}}",
+					"port": "{{KONG_ADMIN_SSL}}",
 					"path": [
 						"services"
 					]
@@ -48,12 +48,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{KONG_HOST}}:{{KONG_PORT}}/services/https-mp1/routes",
+					"raw": "https://{{KONG_HOST}}:{{KONG_ADMIN_SSL}}/services/https-mp1/routes",
 					"protocol": "https",
 					"host": [
 						"{{KONG_HOST}}"
 					],
-					"port": "{{KONG_PORT}}",
+					"port": "{{KONG_ADMIN_SSL}}",
 					"path": [
 						"services",
 						"https-mp1",
@@ -78,12 +78,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{KONG_HOST}}:{{KONG_PORT}}/services/https-mp1/plugins",
+					"raw": "https://{{KONG_HOST}}:{{KONG_ADMIN_SSL}}/services/https-mp1/plugins",
 					"protocol": "https",
 					"host": [
 						"{{KONG_HOST}}"
 					],
-					"port": "{{KONG_PORT}}",
+					"port": "{{KONG_ADMIN_SSL}}",
 					"path": [
 						"services",
 						"https-mp1",
@@ -100,7 +100,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"authInfo\":\n\t{\n\t\t\"credentials\": {\n\t\t\t\"accessKeyId\": \"vm1gFjb+eXFL6VVSSQPZiBfmSoo=\",\n\t\t\t\"secretKey\": \"DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOI/RomRs5wyszoCR5R7A==\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"authInfo\":\n\t{\n\t\t\"credentials\": {\n\t\t\t\"accessKeyId\": \"vm1gFjb+eXFL6VVSSQPZ\",\n\t\t\t\"secretKey\": \"DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOI/Rom\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -145,7 +145,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "SDK-HMAC-SHA256 Access=vm1gFjb+eXFL6VVSSQPZiBfmSoo=, SignedHeaders=content-type;host;x-sdk-date, Signature=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+						"value": "SDK-HMAC-SHA256 Access=vm1gFjb+eXFL6VVSSQPZ, SignedHeaders=content-type;host;x-sdk-date, Signature=097c10b34fd8b9e1456ba7a9f18ab6da8ea98a1b9e4c5704970f2f1438327a4d",
 						"description": "$AccessKeyID is ak value\n$Signature is generate with sk and date and other things\n",
 						"type": "text"
 					},
@@ -201,17 +201,17 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTExNzA5MjAsImlzcyI6Im1lcGF1dGgiLCJzdWIiOiI3OWNiYWM5ZS0zZTBlLTRiNWUtYmZjMi0xZDNiMjBlM2QxYzgifQ.rRoGhHTBIq2_q15Y3pgtuYSZcDxFbT-f686KSeAFEi3ms5tnfAP4jAikCjUvKX71N4dfB5gq_J1VoTM3sve5opJgUXdADz3TAdiFz04FbCKKd_YBMk1MyxwHhhnDnyVT3dlGZuvLRK3huQS648YbqQYBxxc3vz3D1SXKpQ9yKcyP5Nmr-2KMVXqAxqAXvxVNbY1yRJHtzVgQRKpdFuGsR8o0cu4rIDd9_F8H897qoGP9z_tSvLZc0f5q2dki_2eKTAkzjkMNbA3sYzDYPNR7RdY8CH0CdPYL4CpC9NXGB20TMqgZVSdScokzo0OAUgtAHp1qCtiaEFfQLtU4njuIOA",
+						"value": "Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTEzNDg5MjMsImlzcyI6Im1lcGF1dGgiLCJzdWIiOiI3OWNiYWM5ZS0zZTBlLTRiNWUtYmZjMi0xZDNiMjBlM2QxYzgifQ.Yx5SIHsSUJPYYGKoAfRxfgB7lvkrcZ1dSflb1iIwnDtCU1UMlnC0WnxOnwWJNbB8uj8m20wSWengJfd2sMxZ-PeUe-ledDFnm3DSWUqS4B3DO-Axt9cvwCpo_KTF793My_2KCHJfl6RzH_P8P4ZOPSh1EvRClfqFM8yC30lM5juAMP12TWF19ssBZQ1OppnOybnCLdcrZns7xrv519tSIarGbR1FOU-_NkL9foRUalGn1GAKb6Q8-hBDlcLCmZ_aPKAVurbe5e5Nj0914MkX_c2bkwY_Z1AG05UkufLEQoqewh7F9UpoHNmHMAW6A8Ds6TdGoKhnEX6moCuKD_L0hQ",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://{{KONG_HOST}}:{{KONG_PROXY}}/mepssl/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services",
-					"protocol": "http",
+					"raw": "https://{{KONG_HOST}}:{{KONG_PROXY_SSL}}/mepssl/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services",
+					"protocol": "https",
 					"host": [
 						"{{KONG_HOST}}"
 					],
-					"port": "{{KONG_PROXY}}",
+					"port": "{{KONG_PROXY_SSL}}",
 					"path": [
 						"mepssl",
 						"mep",

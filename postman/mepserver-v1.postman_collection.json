@@ -19,6 +19,11 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -51,7 +56,13 @@
 			"name": "app services all get",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services",
 					"protocol": "https",
@@ -66,6 +77,13 @@
 						"applications",
 						"5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
 						"services"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -85,6 +103,11 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -95,8 +118,8 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/appInstance006/services/904a1a64a7d7de411b1a3e74ed1474fa",
-					"protocol": "http",
+					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/appInstance006/services/904a1a64a7d7de411b1a3e74ed1474fa",
+					"protocol": "https",
 					"host": [
 						"{{MEP_HOST}}"
 					],
@@ -128,10 +151,16 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
+					},
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services/904a1a64a7d7de4109a4eb9c25a2ef07",
+					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services/904a1a64a7d7de4109a4eb9c25a2ef07",
+					"protocol": "https",
 					"host": [
 						"{{MEP_HOST}}"
 					],
@@ -153,10 +182,16 @@
 			"name": "app one service one get",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/appInstance006/services/f7e898d1c9ea9edd7496c761ddc92718",
-					"protocol": "http",
+					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/appInstance006/services/f7e898d1c9ea9edd7496c761ddc92718",
+					"protocol": "https",
 					"host": [
 						"{{MEP_HOST}}"
 					],
@@ -180,8 +215,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/services",
-					"protocol": "http",
+					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/services",
+					"protocol": "https",
 					"host": [
 						"{{MEP_HOST}}"
 					],
@@ -202,8 +237,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/services/f7e898d1c9ea9edd5507a90abc7149c4",
-					"protocol": "http",
+					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/services/f7e898d1c9ea9edd5507a90abc7149c4",
+					"protocol": "https",
 					"host": [
 						"{{MEP_HOST}}"
 					],
@@ -223,7 +258,13 @@
 			"name": "end app subscribe add",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"subscriptionType\": \"AppTerminationNotificationSubscription\",\r\n  \"callbackReference\": \"http://127.0.0.1/subscribe\",\r\n  \"appInstanceId\": \"6abe4782-2c70-4e47-9a4e-0ee3a1a0fd1e\"\r\n}",
@@ -256,7 +297,13 @@
 			"name": "end app subscribes get",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_app_support/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/subscriptions",
 					"protocol": "https",
@@ -280,7 +327,13 @@
 			"name": "end app sbuscribe one del",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -317,7 +370,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -351,7 +410,13 @@
 			"name": "avail app subscribe add",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"subscriptionType\": \"SerAvailabilityNotificationSubscription\",\r\n  \"callbackReference\": \"http://example.com\",\r\n  \"filteringCriteria\": {\r\n    \"serInstanceIds\": [\r\n      \"f7e898d1c9ea9edd8a41295fc55c2373\"\r\n    ],\r\n    \"serNames\": [\r\n      \"FaceRegService5\"\r\n    ],\r\n    \"serCategories\": [\r\n      {\r\n        \"href\": \"/example/catalogue1\",\r\n        \"id\": \"id12345\",\r\n        \"name\": \"RNI\",\r\n        \"version\": \"1.2.2\"\r\n      }\r\n    ],\r\n    \"states\": [\r\n      \"ACTIVE\"\r\n    ],\r\n    \"isLocal\": true\r\n  }\r\n}",
@@ -384,7 +449,13 @@
 			"name": "avail app subscribes get",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/subscriptions",
 					"protocol": "https",
@@ -408,7 +479,13 @@
 			"name": "avail app subscribe one del",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"serName\": \"FaceRecognizeService\",\r\n  \"serCategory\": {\r\n    \"href\": \"/example/catalogue1\",\r\n    \"id\": \"id12345\",\r\n    \"name\": \"RNI\",\r\n    \"version\": \"5.2.3\"\r\n  },\r\n  \"version\": \"1.8.2\",\r\n  \"state\": \"ACTIVE\",\r\n  \"transportId\": \"Rest1\",\r\n  \"transportInfo\": {\r\n    \"id\": \"TransId12345\",\r\n    \"name\": \"REST\",\r\n    \"description\": \"REST API\",\r\n    \"type\": \"REST_HTTP\",\r\n    \"protocol\": \"HTTP\",\r\n    \"version\": \"2.0\",\r\n    \"endpoint\": {},\r\n    \"security\": {\r\n      \"oAuth2Info\": {\r\n        \"grantTypes\": [\r\n          \"OAUTH2_CLIENT_CREDENTIALS\"\r\n        ],\r\n        \"tokenEndpoint\": \"/mecSerMgmtApi/security/TokenEndPoint\"\r\n      }\r\n    },\r\n    \"implSpecificInfo\": {}\r\n  },\r\n  \"serializer\": \"JSON\",\r\n  \"scopeOfLocality\": \"MEC_SYSTEM\",\r\n  \"consumedLocalOnly\": false,\r\n  \"isLocal\": true\r\n}",
@@ -433,6 +510,13 @@
 						"5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
 						"subscriptions",
 						"b2c726a7-4e32-4ec4-b27c-67750ef3ec0f"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -445,7 +529,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-AppinstanceID",
+						"value": "5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"serName\": \"FaceRecognizeService\",\r\n  \"serCategory\": {\r\n    \"href\": \"/example/catalogue1\",\r\n    \"id\": \"id12345\",\r\n    \"name\": \"RNI\",\r\n    \"version\": \"5.2.3\"\r\n  },\r\n  \"version\": \"1.8.2\",\r\n  \"state\": \"ACTIVE\",\r\n  \"transportId\": \"Rest1\",\r\n  \"transportInfo\": {\r\n    \"id\": \"TransId12345\",\r\n    \"name\": \"REST\",\r\n    \"description\": \"REST API\",\r\n    \"type\": \"REST_HTTP\",\r\n    \"protocol\": \"HTTP\",\r\n    \"version\": \"2.0\",\r\n    \"endpoint\": {},\r\n    \"security\": {\r\n      \"oAuth2Info\": {\r\n        \"grantTypes\": [\r\n          \"OAUTH2_CLIENT_CREDENTIALS\"\r\n        ],\r\n        \"tokenEndpoint\": \"/mecSerMgmtApi/security/TokenEndPoint\"\r\n      }\r\n    },\r\n    \"implSpecificInfo\": {}\r\n  },\r\n  \"serializer\": \"JSON\",\r\n  \"scopeOfLocality\": \"MEC_SYSTEM\",\r\n  \"consumedLocalOnly\": false,\r\n  \"isLocal\": true\r\n}",
