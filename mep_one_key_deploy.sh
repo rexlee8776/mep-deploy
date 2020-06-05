@@ -4,12 +4,14 @@ set -x
 
 ./clean_all.sh
 
-./generate_cert.sh
+scripts/mep_pre_deploy.sh
 
-./pgsql_kong_deploy.sh
+scripts/generate_cert.sh
 
-./mepauth_deploy.sh -u mepauth -p mepauth
+scripts/pgsql_kong_deploy.sh
 
-./mepserver_deploy.sh
+scripts/mepauth_deploy.sh -u mepauth -p mepauth
 
-./check_env_status.sh
+scripts/mepserver_deploy.sh
+
+scripts/check_env_status.sh

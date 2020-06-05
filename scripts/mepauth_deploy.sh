@@ -24,7 +24,3 @@ docker run -itd --name mepauth -p 127.0.0.1:10443:10443\
              -e "MEPAUTH_APIGW_PORT=8444"  \
              -e "MEPAUTH_DB_SSLMODE=verify-ca" \
              edgegallery/mepauth:latest $*
-
-# check mepauth docker status
-sleep 1
-docker ps -a |grep mepauth
