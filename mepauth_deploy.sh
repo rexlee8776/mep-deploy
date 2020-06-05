@@ -15,9 +15,9 @@ docker run -itd --name mepauth -p 127.0.0.1:10443:10443\
              -v ${CertDir}/mepserver_tls.crt:${MepauthConf}/server.crt \
              -v ${CertDir}/mepserver_tls.key:${MepauthConf}/server.key \
              -v ${CertDir}/ca.crt:${MepauthConf}/ca.crt \
-             -e "MEPAUTH_DB_NAME=kong" \
-             -e "MEPAUTH_DB_USER=kong" \
-             -e "MEPAUTH_DB_PASSWD=kong" \
+             -e "MEPAUTH_DB_NAME=mepauth" \
+             -e "MEPAUTH_DB_USER=mepauth" \
+             -e "MEPAUTH_DB_PASSWD=mepauth" \
              -e "MEPAUTH_DB_HOST=postgres-db" \
              -e "MEPAUTH_DB_PORT=5432" \
              -e "MEPAUTH_APIGW_HOST=kong-service" \
