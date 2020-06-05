@@ -15,6 +15,7 @@ docker run -itd --name mepauth -p 127.0.0.1:10443:10443\
              -v ${CertDir}/mepserver_tls.crt:${MepauthConf}/server.crt \
              -v ${CertDir}/mepserver_tls.key:${MepauthConf}/server.key \
              -v ${CertDir}/ca.crt:${MepauthConf}/ca.crt \
+             -v ${CertDir}/aes_key_file:${MepauthConf}/aes_key_file \
              -e "MEPAUTH_DB_NAME=mepauth" \
              -e "MEPAUTH_DB_USER=mepauth" \
              -e "MEPAUTH_DB_PASSWD=mepauth" \
