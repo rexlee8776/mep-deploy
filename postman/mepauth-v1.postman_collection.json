@@ -130,7 +130,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"authInfo\":\n\t{\n\t\t\"credentials\": {\n\t\t\t\"accessKeyId\": \"vm1gFjb+eXFL6VVSSQPZ\",\n\t\t\t\"secretKey\": \"DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOI/Rom\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"authInfo\":\n\t{\n\t\t\"credentials\": {\n\t\t\t\"accessKeyId\": \"QVUJMSUMgS0VZLS0tLS0\",\n\t\t\t\"secretKey\": \"DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOIRomRs5wyszoCR5R7AtVa28KT3lSc\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -175,18 +175,13 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "SDK-HMAC-SHA256 Access=vm1gFjb+eXFL6VVSSQPZ, SignedHeaders=content-type;host;x-sdk-date, Signature=097c10b34fd8b9e1456ba7a9f18ab6da8ea98a1b9e4c5704970f2f1438327a4d",
+						"value": "SDK-HMAC-SHA256 Access=QVUJMSUMgS0VZLS0tLS0, SignedHeaders=content-type;host;x-sdk-date, Signature=142b0dc3feaeb3662b2033a8e6425596546e08a231aa39179b4060867dd15d3d",
 						"description": "$AccessKeyID is ak value\n$Signature is generate with sk and date and other things\n",
 						"type": "text"
 					},
 					{
 						"key": "x-sdk-date",
-						"value": "20060102T150405Z",
-						"type": "text"
-					},
-					{
-						"key": "Host",
-						"value": "{{MEP_HOST}}",
+						"value": "20200606T145426Z",
 						"type": "text"
 					}
 				],
