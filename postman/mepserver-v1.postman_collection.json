@@ -210,7 +210,7 @@
 			"response": []
 		},
 		{
-			"name": "services get",
+			"name": "services get (Deprecated)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -232,7 +232,7 @@
 			"response": []
 		},
 		{
-			"name": "service one get",
+			"name": "service one get (Deprecated)",
 			"request": {
 				"method": "GET",
 				"header": [],
