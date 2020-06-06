@@ -4,7 +4,7 @@ set -x
 
 KONG_HOST=edgegallery.org
 KONG_ADMIN_PORT=8444
-MEPSERVER_HOST=127.0.0.1
+MEPSERVER_HOST=10.151.154.36
 MEPSERVER_PORT=30188
 CACRT_PATH=/tmp/mepserver/ca.crt
 
@@ -35,4 +35,11 @@ curl --cacert "${CACRT_PATH}" --location --request POST "https://${KONG_HOST}:${
 --header 'Content-Type: application/json' \
 --data-raw '{
         "name": "jwt"
+}'
+
+# enable appid-header plugin for mepserver service
+curl --cacert "${CACRT_PATH}" --location --request POST "https://${KONG_HOST}:${KONG_ADMIN_PORT}/services/https-mp1/plugins" \
+--header 'Content-Type: application/json' \
+--data-raw '{
+        "name": "appid-header"
 }'

@@ -5,10 +5,6 @@ export CertName=mepserver
 CertDir=/tmp/${CertName}
 DataDir=/data/mep
 
-# clean docker 
-docker rm -f kong-service
-docker rm -f postgres-db
-
 rm -rf ${DataDir}
 mkdir ${DataDir}
 chown -R eguser:eggroup ${DataDir}
@@ -70,6 +66,16 @@ docker run --rm \
 
 # run kong service
 sleep 5
+
+## setup plugin and kong.conf
+cp -r kong-conf /tmp/kong-conf
+chown -R eguser:eggroup /tmp/kong-conf
+chmod 700 /tmp/kong-conf
+
+KONG_PLUGIN_PATH=/tmp/kong-conf/appid-header
+KONG_CONF_PATH=/tmp/kong-conf/kong.conf
+cp -r appid-header ${PLUGIN_PATH}
+## run kong docker
 docker run -d --name kong-service \
     --user=166:166 \
     --link postgres-db:postgres-db \
@@ -77,6 +83,8 @@ docker run -d --name kong-service \
     -v ${CertDir}/mepserver_tls.crt:/run/kongssl/kong.crt \
     -v ${CertDir}/mepserver_tls.key:/run/kongssl/kong.key \
     -v ${CertDir}/ca.crt:/run/kongssl/ca.crt \
+    -v ${KONG_PLUGIN_PATH}:/usr/local/share/lua/5.1/kong/plugins/appid-header \
+    -v ${KONG_CONF_PATH}:/etc/kong/kong.conf \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
