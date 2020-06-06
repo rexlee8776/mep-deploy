@@ -18,8 +18,6 @@ docker run -itd --name mepauth -p 10443:10443\
              -v ${CertDir}/ca.crt:${MepSslDir}/ca.crt \
              -v ${CertDir}/aes_key_file:${MepSslDir}/aes_key_file \
              -e "MEPAUTH_DB_NAME=mepauth" \
-             -e "MEPAUTH_DB_USER=mepauth" \
-             -e "MEPAUTH_DB_PASSWD=mepauth" \
              -e "MEPAUTH_DB_HOST=postgres-db" \
              -e "MEPAUTH_DB_PORT=5432" \
              -e "MEPAUTH_APIGW_HOST=kong-service" \
