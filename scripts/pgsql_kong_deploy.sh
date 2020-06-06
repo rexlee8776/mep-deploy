@@ -102,6 +102,10 @@ docker run -d --name kong-service \
     -e "KONG_ADMIN_SSL_CERT=/run/kongssl/kong.crt" \
     -e "KONG_ADMIN_SSL_CERT_KEY=/run/kongssl/kong.key" \
     -e "KONG_PREFIX=/var/lib/kong/data/kongdata" \
+    -e "KONG_SSL_CIPHER_SUITE=custom" \
+    -e "KONG_SSL_CIPHERS=ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384" \
+    -e "KONG_NGINX_HTTP_SSL_PROTOCOLS=TLSv1.2 TLSv1.3" \
+    -e "KONG_NGINX_HTTP_SSL_PREFER_SERVER_CIPHERS=on" \
     -v "${DataDir}:/var/lib/kong/data" \
     -p 8443:8443 \
     -p 8444:8444 \
