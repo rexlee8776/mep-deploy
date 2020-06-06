@@ -118,7 +118,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/appInstance006/services/904a1a64a7d7de411b1a3e74ed1474fa",
+					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services/904a1a64a7d7de411b1a3e74ed1474fa",
 					"protocol": "https",
 					"host": [
 						"{{MEP_HOST}}"
@@ -129,7 +129,7 @@
 						"mec_service_mgmt",
 						"v1",
 						"applications",
-						"appInstance006",
+						"5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
 						"services",
 						"904a1a64a7d7de411b1a3e74ed1474fa"
 					]
@@ -190,7 +190,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/appInstance006/services/f7e898d1c9ea9edd7496c761ddc92718",
+					"raw": "https://{{MEP_HOST}}:{{MEP_PORT}}/mep/mec_service_mgmt/v1/applications/5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f/services/f7e898d1c9ea9edd7496c761ddc92718",
 					"protocol": "https",
 					"host": [
 						"{{MEP_HOST}}"
@@ -201,7 +201,7 @@
 						"mec_service_mgmt",
 						"v1",
 						"applications",
-						"appInstance006",
+						"5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f",
 						"services",
 						"f7e898d1c9ea9edd7496c761ddc92718"
 					]
