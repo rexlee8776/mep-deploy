@@ -77,7 +77,7 @@ chmod 700 /tmp/kong-conf
 
 KONG_PLUGIN_PATH=/tmp/kong-conf/appid-header
 KONG_CONF_PATH=/tmp/kong-conf/kong.conf
-cp -r appid-header ${PLUGIN_PATH}
+
 ## run kong docker
 docker run -d --name kong-service \
     --user=166:166 \
