@@ -1,6 +1,8 @@
+echo "MEP_IP should set be the host ip!"
+
 docker run –itd –name mepagent
 --network=mep-net
--e MEP_IP=127.0.0.1
+-e MEP_IP=10.151.154.36
 -e MEP_AUTH_PORT=10443
 -e MEP_APIGW_PORT=8443
 -e ENABLE_WAIT=true
