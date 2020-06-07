@@ -4,7 +4,7 @@ docker run –itd –name mepagent
 -e MEP_AUTH_PORT=10443
 -e MEP_APIGW_PORT=8443
 -e ENABLE_WAIT=true
--v /tmp/mepserver/ca.crt:/etc/mepssl/trust.cer
+-v /tmp/mepserver/ca.crt:/etc/mepssl/ca.crt
 -e "CA_CERT=/etc/mepssl/ca.crt"
 -e "CA_CERT_DOMAIN_NAME=edgegallery.org"
 -v app_instance_info.yaml:/usr/app/conf/app_instance_info.yaml \
