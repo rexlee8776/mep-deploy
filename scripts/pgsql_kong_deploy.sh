@@ -35,7 +35,6 @@ docker network create mep-net
 docker run -d --name postgres-db \
                 --user=166:166 \
                 --network=mep-net \
-                -p 5432:5432 \
                 -e "POSTGRES_USER=admin" \
                 -e "POSTGRES_DB=kong" \
                 -e "POSTGRES_PASSWORD=admin" \
