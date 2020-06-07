@@ -5,6 +5,7 @@ docker run –itd –name mepagent
 -e MEP_IP=10.151.154.36
 -e MEP_AUTH_PORT=10443
 -e MEP_APIGW_PORT=8443
+-e MEP_SRV_ROUTE=mepssl
 -e ENABLE_WAIT=true
 -v /tmp/mepserver/ca.crt:/etc/mepssl/ca.crt
 -e "CA_CERT=/etc/mepssl/ca.crt"
