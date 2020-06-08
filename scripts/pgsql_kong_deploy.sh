@@ -28,9 +28,6 @@ EOF
 chown eguser:eggroup ${CertDir}/init.sql
 chmod 600 ${CertDir}/init.sql
 
-# create mep-net network
-docker network create mep-net
-
 # run postgres db
 docker run -d --name postgres-db \
                 --user=166:166 \
@@ -81,6 +78,7 @@ KONG_CONF_PATH=/tmp/kong-conf/kong.conf
 docker run -d --name kong-service \
     --user=166:166 \
     --link postgres-db:postgres-db \
+    --link mepserver:mepserver \
     --network=mep-net \
     -v ${CertDir}/mepserver_tls.crt:/var/lib/kong/data/kong.crt \
     -v ${CertDir}/mepserver_tls.key:/var/lib/kong/data/kong.key \
