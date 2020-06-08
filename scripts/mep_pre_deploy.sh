@@ -30,3 +30,6 @@ mkdir -p /tmp/mepserver
 chown eguser:eggroup /tmp/mepserver
 
 chmod 700 /tmp/mepserver
+
+# create mep network
+docker network create mep-net

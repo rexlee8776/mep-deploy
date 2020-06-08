@@ -1,12 +1,12 @@
 #!/bin/bash
-# clean docker and certs
-docker rm -f mepauth
+
 # initial variable
 export CertName=mepserver
 CertDir=/tmp/${CertName}
 MepSslDir=/usr/mep/ssl
 DOMAIN_NAME=edgegallery.org
 
+# deploy mepauth docker
 docker run -itd --name mepauth -p 10443:10443 \
              --network mep-net \
              --link postgres-db:postgres-db \
