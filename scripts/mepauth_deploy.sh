@@ -7,7 +7,7 @@ CertDir=/tmp/${CertName}
 MepSslDir=/usr/mep/ssl
 DOMAIN_NAME=edgegallery.org
 
-docker run -itd --name mepauth -p 10443:10443\
+docker run -itd --name mepauth -p 10443:10443 \
              --network mep-net \
              --link postgres-db:postgres-db \
              --link kong-service:kong-service \
