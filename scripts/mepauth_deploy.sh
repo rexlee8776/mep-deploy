@@ -22,6 +22,5 @@ docker run -itd --name mepauth -p 10443:10443 \
              -e "MEPAUTH_DB_PORT=5432" \
              -e "MEPAUTH_APIGW_HOST=kong-service" \
              -e "MEPAUTH_APIGW_PORT=8444"  \
-             -e "MEPAUTH_DB_SSLMODE=verify-ca" \
              -e "MEPAUTH_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
              edgegallery/mepauth:latest $*
