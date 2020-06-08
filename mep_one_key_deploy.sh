@@ -8,11 +8,11 @@ scripts/mep_pre_deploy.sh
 
 scripts/generate_cert.sh
 
+scripts/mepserver_deploy.sh
+
 scripts/pgsql_kong_deploy.sh
 
 sleep 5
 scripts/mepauth_deploy.sh -u mepauth -p mepauth -jwt te9Fmv%qaq
-
-scripts/mepserver_deploy.sh
 
 scripts/check_env_status.sh
