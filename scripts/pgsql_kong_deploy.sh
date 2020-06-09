@@ -93,7 +93,6 @@ docker run -d --name kong-service \
     -e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" \
     -e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
     -e "KONG_ADMIN_ERROR_LOG=/dev/stderr" \
-    -e "KONG_ADMIN_LISTEN=0.0.0.0:8444 ssl" \
     -e "KONG_PG_SSL=on" \
     -e "KONG_PG_SSL_VERIFY=on" \
     -e "KONG_LUA_SSL_TRUSTED_CERTIFICATE=/var/lib/kong/data/ca.crt" \
@@ -109,7 +108,7 @@ docker run -d --name kong-service \
     -v "${KongDataDir}:/var/lib/kong/data" \
     -p 8443:8443 \
     -p 8444:8444 \
-    kong:1.5.1-alpine
+    kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
 
 ## modify owner and mode of soft link
 chown eguser:eggroup /data/mep/kong/ca.crt
