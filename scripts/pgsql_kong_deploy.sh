@@ -8,8 +8,8 @@ KongDataDir=/data/mep/kong
 
 
 cat > ${CertDir}/init.sql << EOF
-CREATE USER kong WITH PASSWORD 'kong';
-CREATE USER mepauth WITH PASSWORD 'mepauth';
+CREATE USER kong WITH PASSWORD 'te9Fmv%qaq';
+CREATE USER mepauth WITH PASSWORD 'te9Fmv%qaq';
 CREATE DATABASE mepauth;
 REVOKE connect ON DATABASE kong FROM PUBLIC;
 REVOKE connect ON DATABASE mepauth FROM PUBLIC;
@@ -34,7 +34,7 @@ docker run -d --name postgres-db \
                 --network=mep-net \
                 -e "POSTGRES_USER=admin" \
                 -e "POSTGRES_DB=kong" \
-                -e "POSTGRES_PASSWORD=admin" \
+                -e "POSTGRES_PASSWORD=te9Fmv%qaq" \
                 -e "PGDATA=/var/lib/postgresql/data/pgdata" \
                 -v "${PGDataDir}:/var/lib/postgresql/data" \
                 -v "${CertDir}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt" \
@@ -60,7 +60,7 @@ docker run --rm \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
-    -e "KONG_PG_PASSWORD=kong" \
+    -e "KONG_PG_PASSWORD=te9Fmv%qaq" \
     kong:1.5.1-alpine kong migrations bootstrap
 
 # run kong service
@@ -88,7 +88,7 @@ docker run -d --name kong-service \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
-    -e "KONG_PG_PASSWORD=kong" \
+    -e "KONG_PG_PASSWORD=te9Fmv%qaq" \
     -e "KONG_PROXY_ACCESS_LOG=/dev/stdout" \
     -e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" \
     -e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
