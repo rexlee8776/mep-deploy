@@ -118,5 +118,8 @@ chmod 600 /data/mep/kong/ca.crt
 chmod 600 /data/mep/kong/kong.crt
 chmod 600 /data/mep/kong/kong.key
 
+# remove init.sql
+rm ${CertDir}/init.sql
+
 # check docker status
 docker ps -a |grep -E '(postgres-db|kong-service)'
