@@ -30,6 +30,10 @@ openssl rsa -in jwt_privatekey -aes256 -passout pass:${PassWd} -out jwt_encrypte
 # generate aes key file
 echo -n ${AesKey} > aes_key_file
 
+# remove unnecessary key file
+rm ca.key
+rm jwt_privatekey
+
 # setup read permission
 chown eguser:eggroup ${CertDir}/*
 chmod 600 ${CertDir}/*
