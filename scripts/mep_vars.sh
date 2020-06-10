@@ -11,7 +11,6 @@ KONG_CONF_PATH=/tmp/kong-conf/kong.conf
 MEPAUTH_SSL_DIR=/usr/mep/ssl
 DOMAIN_NAME=edgegallery.org
 
-MEP_CERTS_DIR=/home/EG-LDVS/${CertName}
 MEPSERVER_SSL_DIR=/usr/mep/ssl
 
 CERT_NAME=${CERT_NAME:-mepserver}
