@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -x
-
 # initial variables
+set +x
 source ./scripts/mep_vars.sh
+set -x
 
 # add eguser and eggroup
 groupadd -r -g 166 eggroup

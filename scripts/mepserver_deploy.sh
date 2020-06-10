@@ -1,8 +1,9 @@
 #!/bin/bash
 
-set -x
 # initial variable
+set +x
 source scripts/mep_vars.sh
+set -x
 
 # run mepserver docker
 docker run -itd --name mepserver --network mep-net -e "SSL_ROOT=${MEPSERVER_SSL_DIR}" \

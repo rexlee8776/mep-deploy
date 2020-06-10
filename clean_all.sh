@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -x
-
 # initial variables
-source ./scripts/mep_vars.sh
+set +x
+source scripts/mep_vars.sh
+set -x
 
 docker rm -f mepserver
 docker rm -f mepauth

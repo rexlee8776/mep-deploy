@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -x
-
 # initial variable
-source ./scripts/mep_vars.sh
+set +x
+source scripts/mep_vars.sh
+set -x
 
 # deploy mepauth docker
 docker run -itd --name mepauth -p 10443:10443 \

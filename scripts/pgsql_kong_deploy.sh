@@ -1,8 +1,9 @@
 #!/bin/bash
 
-set -x
 # initial variable
-source ./scripts/mep_vars.sh
+set +x
+source scripts/mep_vars.sh
+set -x
 
 echo "CREATE USER kong WITH PASSWORD '${PG_KONG_PW}';" > ${MEP_CERTS_DIR}/init.sql
 echo "CREATE USER mepauth WITH PASSWORD '${PG_MEPAUTH_PW}';" >> ${MEP_CERTS_DIR}/init.sql
@@ -115,7 +116,6 @@ chmod 600 ${KONG_DATA_DIR}/kong.crt
 chmod 600 ${KONG_DATA_DIR}/kong.key
 
 # remove init.sql
-cat ${MEP_CERTS_DIR}/init.sql
 rm ${MEP_CERTS_DIR}/init.sql
 
 # check docker status

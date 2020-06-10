@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +x
 PG_DATA_DIR=/data/thirdparty/postgres
 KONG_DATA_DIR=/data/thirdparty/kong
 MEP_CERTS_DIR=/home/EG-LDVS/mepserver

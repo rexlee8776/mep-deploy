@@ -2,10 +2,10 @@
 
 echo "MEP_IP should set be the host ip!"
 
-set -x
-
 # initial variables
+set +x
 source scripts/mep_vars.sh
+set -x
 
 # deploy mepagent
 docker run -itd --name mepagent \

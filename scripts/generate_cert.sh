@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # initial variables
+set +x
 source scripts/mep_vars.sh
 
 cd ${MEP_CERTS_DIR}

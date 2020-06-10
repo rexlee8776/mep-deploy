@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -x
-
 # initial variables
+set +x
 source scripts/mep_vars.sh
+set -x
 
 grep "${KONG_HOST}" /etc/hosts > /dev/null
 if [ $? -ne 0 ]; then

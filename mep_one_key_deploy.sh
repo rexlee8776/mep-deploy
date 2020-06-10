@@ -1,9 +1,10 @@
 #!/bin/bash
 
-set -x
 
 #initial variables
+set +x
 source scripts/mep_vars.sh
+set -x
 
 ./clean_all.sh
 
