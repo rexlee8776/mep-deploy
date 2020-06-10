@@ -3,7 +3,7 @@
 CertName=${CertName:-mepserver}
 PassWd=te9Fmv%qaq
 AesKey=te9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaq
-CertDir=/tmp/${CertName}
+CertDir=/home/EG-LDVS/${CertName}
 DOMAIN_NAME=edgegallery.org
 
 cd ${CertDir}
