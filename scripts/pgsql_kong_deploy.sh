@@ -4,9 +4,10 @@ set -x
 # initial variable
 source ./scripts/mep_vars.sh
 
-cat > ${MEP_CERTS_DIR}/init.sql << EOF
-CREATE USER kong WITH PASSWORD 'kong';
-CREATE USER mepauth WITH PASSWORD 'mepauth';
+echo "CREATE USER kong WITH PASSWORD '${PG_KONG_PW}';" > ${MEP_CERTS_DIR}/init.sql
+echo "CREATE USER mepauth WITH PASSWORD '${PG_MEPAUTH_PW}';" >> ${MEP_CERTS_DIR}/init.sql
+
+cat >> ${MEP_CERTS_DIR}/init.sql << EOF
 CREATE DATABASE mepauth;
 REVOKE connect ON DATABASE kong FROM PUBLIC;
 REVOKE connect ON DATABASE mepauth FROM PUBLIC;
@@ -32,7 +33,7 @@ docker run -d --name postgres-db \
                 -p 5432:5432 \
                 -e "POSTGRES_USER=admin" \
                 -e "POSTGRES_DB=kong" \
-                -e "POSTGRES_PASSWORD=admin" \
+                -e "POSTGRES_PASSWORD=${PG_ADMIN_PW}" \
                 -e "PGDATA=/var/lib/postgresql/data/pgdata" \
                 -v "${PG_DATA_DIR}:/var/lib/postgresql/data" \
                 -v "${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt" \
@@ -58,7 +59,7 @@ docker run --rm \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
-    -e "KONG_PG_PASSWORD=kong" \
+    -e "KONG_PG_PASSWORD=${PG_KONG_PW}" \
     kong:1.5.1-alpine kong migrations bootstrap
 
 # run kong service
@@ -83,7 +84,7 @@ docker run -d --name kong-service \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
-    -e "KONG_PG_PASSWORD=kong" \
+    -e "KONG_PG_PASSWORD=${PG_KONG_PW}" \
     -e "KONG_PROXY_ACCESS_LOG=/dev/stdout" \
     -e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" \
     -e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
@@ -106,14 +107,15 @@ docker run -d --name kong-service \
     kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
 
 ## modify owner and mode of soft link
-chown eguser:eggroup /data/thirdparty/kong/ca.crt
-chown eguser:eggroup /data/thirdparty/kong/kong.crt
-chown eguser:eggroup /data/thirdparty/kong/kong.key
-chmod 600 /data/thirdparty/kong/ca.crt
-chmod 600 /data/thirdparty/kong/kong.crt
-chmod 600 /data/thirdparty/kong/kong.key
+chown eguser:eggroup ${KONG_DATA_DIR}/ca.crt
+chown eguser:eggroup ${KONG_DATA_DIR}/kong.crt
+chown eguser:eggroup ${KONG_DATA_DIR}/kong.key
+chmod 600 ${KONG_DATA_DIR}/ca.crt
+chmod 600 ${KONG_DATA_DIR}/kong.crt
+chmod 600 ${KONG_DATA_DIR}/kong.key
 
 # remove init.sql
+cat ${MEP_CERTS_DIR}/init.sql
 rm ${MEP_CERTS_DIR}/init.sql
 
 # check docker status
