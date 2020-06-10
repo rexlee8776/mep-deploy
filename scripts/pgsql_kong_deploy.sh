@@ -34,6 +34,7 @@ docker run -d --name postgres-db \
                 -e "POSTGRES_USER=admin" \
                 -e "POSTGRES_DB=kong" \
                 -e "POSTGRES_PASSWORD=${PG_ADMIN_PW}" \
+                -e "POSTGRES_INITDB_ARGS=--auth-local=password" \
                 -e "PGDATA=/var/lib/postgresql/data/pgdata" \
                 -v "${PG_DATA_DIR}:/var/lib/postgresql/data" \
                 -v "${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt" \
