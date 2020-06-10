@@ -2,9 +2,9 @@
 
 # initial variable
 export CertName=mepserver
-CertDir=/tmp/${CertName}
-PGDataDir=/data/mep/postgres
-KongDataDir=/data/mep/kong
+CertDir=/home/EG-LDVS/${CertName}
+PGDataDir=/data/thirdparty/postgres
+KongDataDir=/data/thirdparty/kong
 
 
 cat > ${CertDir}/init.sql << EOF
@@ -46,10 +46,10 @@ docker run -d --name postgres-db \
                 -c ssl_key_file=/var/lib/postgresql/data/server.key
 
 ## modify owner and mode of soft link
-chown eguser:eggroup /data/mep/postgres/server.crt
-chown eguser:eggroup /data/mep/postgres/server.key
-chmod 600 /data/mep/postgres/server.crt
-chmod 600 /data/mep/postgres/server.key
+chown eguser:eggroup /data/thirdparty/postgres/server.crt
+chown eguser:eggroup /data/thirdparty/postgres/server.key
+chmod 600 /data/thirdparty/postgres/server.crt
+chmod 600 /data/thirdparty/postgres/server.key
 
 # inital postgres db
 sleep 5
@@ -111,12 +111,12 @@ docker run -d --name kong-service \
     kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
 
 ## modify owner and mode of soft link
-chown eguser:eggroup /data/mep/kong/ca.crt
-chown eguser:eggroup /data/mep/kong/kong.crt
-chown eguser:eggroup /data/mep/kong/kong.key
-chmod 600 /data/mep/kong/ca.crt
-chmod 600 /data/mep/kong/kong.crt
-chmod 600 /data/mep/kong/kong.key
+chown eguser:eggroup /data/thirdparty/kong/ca.crt
+chown eguser:eggroup /data/thirdparty/kong/kong.crt
+chown eguser:eggroup /data/thirdparty/kong/kong.key
+chmod 600 /data/thirdparty/kong/ca.crt
+chmod 600 /data/thirdparty/kong/kong.crt
+chmod 600 /data/thirdparty/kong/kong.key
 
 # remove init.sql
 rm ${CertDir}/init.sql
