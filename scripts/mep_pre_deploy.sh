@@ -2,37 +2,29 @@
 
 set -x
 
+# initial variables
+source ./scripts/mep_vars.sh
+
 # add eguser and eggroup
 groupadd -r -g 166 eggroup
-
 useradd -r -g 166 -u 166 eguser
 
 # add eguser to docker group
 usermod -aG docker eguser
 
 # create postgres work dir
-POSTGRES_DATA=/data/thirdparty/postgres
-KONG_DATA=/data/thirdparty/kong
-MEP_CERTS_DIR=/home/EG-LDVS/mepserver
-
-mkdir -p ${POSTGRES_DATA}
-
-chown eguser:eggroup ${POSTGRES_DATA}
-
-chmod 700 ${POSTGRES_DATA}
+mkdir -p ${PG_DATA_DIR}
+chown eguser:eggroup ${PG_DATA_DIR}
+chmod 700 ${PG_DATA_DIR}
 
 # create kong work dir
-mkdir -p ${KONG_DATA}
-
-chown eguser:eggroup ${KONG_DATA}
-
-chmod 700 ${KONG_DATA}
+mkdir -p ${KONG_DATA_DIR}
+chown eguser:eggroup ${KONG_DATA_DIR}
+chmod 700 ${KONG_DATA_DIR}
 
 # create cert generation dir
 mkdir -p ${MEP_CERTS_DIR}
-
 chown eguser:eggroup ${MEP_CERTS_DIR}
-
 chmod 700 ${MEP_CERTS_DIR}
 
 # create mep network

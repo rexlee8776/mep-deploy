@@ -1,13 +1,10 @@
 #!/bin/bash
 
+set -x
 # initial variable
-export CertName=mepserver
-CertDir=/home/EG-LDVS/${CertName}
-PGDataDir=/data/thirdparty/postgres
-KongDataDir=/data/thirdparty/kong
+source ./scripts/mep_vars.sh
 
-
-cat > ${CertDir}/init.sql << EOF
+cat > ${MEP_CERTS_DIR}/init.sql << EOF
 CREATE USER kong WITH PASSWORD 'kong';
 CREATE USER mepauth WITH PASSWORD 'mepauth';
 CREATE DATABASE mepauth;
@@ -25,8 +22,8 @@ DROP DATABASE template0;
 DROP DATABASE template1;
 EOF
 
-chown eguser:eggroup ${CertDir}/init.sql
-chmod 600 ${CertDir}/init.sql
+chown eguser:eggroup ${MEP_CERTS_DIR}/init.sql
+chmod 600 ${MEP_CERTS_DIR}/init.sql
 
 # run postgres db
 docker run -d --name postgres-db \
@@ -37,10 +34,10 @@ docker run -d --name postgres-db \
                 -e "POSTGRES_DB=kong" \
                 -e "POSTGRES_PASSWORD=admin" \
                 -e "PGDATA=/var/lib/postgresql/data/pgdata" \
-                -v "${PGDataDir}:/var/lib/postgresql/data" \
-                -v "${CertDir}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt" \
-                -v "${CertDir}/mepserver_tls.key:/var/lib/postgresql/data/server.key" \
-                -v "${CertDir}/init.sql:/docker-entrypoint-initdb.d/init.sql" \
+                -v "${PG_DATA_DIR}:/var/lib/postgresql/data" \
+                -v "${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt" \
+                -v "${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/postgresql/data/server.key" \
+                -v "${MEP_CERTS_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql" \
                 postgres:12.2 \
                 -c ssl=on \
                 -c ssl_cert_file=/var/lib/postgresql/data/server.crt \
@@ -72,18 +69,15 @@ cp -r kong-conf /tmp/kong-conf
 chown -R eguser:eggroup /tmp/kong-conf
 chmod 700 /tmp/kong-conf
 
-KONG_PLUGIN_PATH=/tmp/kong-conf/appid-header
-KONG_CONF_PATH=/tmp/kong-conf/kong.conf
-
 ## run kong docker
 docker run -d --name kong-service \
     --user=166:166 \
     --link postgres-db:postgres-db \
     --link mepserver:mepserver \
     --network=mep-net \
-    -v ${CertDir}/mepserver_tls.crt:/var/lib/kong/data/kong.crt \
-    -v ${CertDir}/mepserver_tls.key:/var/lib/kong/data/kong.key \
-    -v ${CertDir}/ca.crt:/var/lib/kong/data/ca.crt \
+    -v ${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/kong/data/kong.crt \
+    -v ${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/kong/data/kong.key \
+    -v ${MEP_CERTS_DIR}/ca.crt:/var/lib/kong/data/ca.crt \
     -v ${KONG_PLUGIN_PATH}:/usr/local/share/lua/5.1/kong/plugins/appid-header \
     -v ${KONG_CONF_PATH}:/etc/kong/kong.conf \
     -e "KONG_DATABASE=postgres" \
@@ -106,7 +100,7 @@ docker run -d --name kong-service \
     -e "KONG_SSL_CIPHERS=ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384" \
     -e "KONG_NGINX_HTTP_SSL_PROTOCOLS=TLSv1.2 TLSv1.3" \
     -e "KONG_NGINX_HTTP_SSL_PREFER_SERVER_CIPHERS=on" \
-    -v "${KongDataDir}:/var/lib/kong/data" \
+    -v "${KONG_DATA_DIR}:/var/lib/kong/data" \
     -p 8443:8443 \
     -p 8444:8444 \
     kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
@@ -120,7 +114,7 @@ chmod 600 /data/thirdparty/kong/kong.crt
 chmod 600 /data/thirdparty/kong/kong.key
 
 # remove init.sql
-rm ${CertDir}/init.sql
+rm ${MEP_CERTS_DIR}/init.sql
 
 # check docker status
 docker ps -a |grep -E '(postgres-db|kong-service)'

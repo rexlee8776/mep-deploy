@@ -2,11 +2,8 @@
 
 set -x
 
-KONG_HOST=edgegallery.org
-KONG_ADMIN_PORT=8444
-MEPSERVER_HOST=10.151.154.36
-MEPSERVER_PORT=30188
-CACRT_PATH=/tmp/mepserver/ca.crt
+# initial variables
+source scripts/mep_vars.sh
 
 grep "${KONG_HOST}" /etc/hosts > /dev/null
 if [ $? -ne 0 ]; then

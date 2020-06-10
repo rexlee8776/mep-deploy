@@ -1,8 +1,13 @@
+#!/bin/bash
+
 echo "MEP_IP should set be the host ip!"
 
-AK=QVUJMSUMgS0VZLS0tLS0
-SK=DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOIRomRs5wyszoCR5R7AtVa28KT3lSc
+set -x
 
+# initial variables
+source scripts/mep_vars.sh
+
+# deploy mepagent
 docker run -itd --name mepagent \
                 --network=mep-net \
                 -e MEP_IP=10.151.154.36 \
@@ -11,7 +16,7 @@ docker run -itd --name mepagent \
                 -e MEP_SRV_ROUTE=mepssl \
                 -e ENABLE_WAIT=true \
                 -e "CA_CERT=/etc/mepssl/ca.crt" \
-                -e "CA_CERT_DOMAIN_NAME=edgegallery.org" \
-                -v /tmp/mepserver/ca.crt:/etc/mepssl/ca.crt \
+                -e "CA_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
+                -v ${CACRT_PATH}:/etc/mepssl/ca.crt \
                 -v app_instance_info.yaml:/usr/app/conf/app_instance_info.yaml \
-                edgegallery/mep-agent:latest –ak ${AK} –sk ${SK}
+                edgegallery/mep-agent:latest -ak ${ACCESS_KEY} -sk ${SECRET_KEY}
