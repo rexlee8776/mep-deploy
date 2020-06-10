@@ -2,7 +2,7 @@
 
 # initial variable
 export CertName=mepserver
-CertDir=/tmp/${CertName}
+CertDir=/home/EG-LDVS/${CertName}
 MepSslDir=/usr/mep/ssl
 DOMAIN_NAME=edgegallery.org
 
