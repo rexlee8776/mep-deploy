@@ -11,25 +11,29 @@ useradd -r -g 166 -u 166 eguser
 usermod -aG docker eguser
 
 # create postgres work dir
-mkdir -p /data/thirdpatry/postgres
+POSTGRES_DATA=/data/thirdparty/postgres
+KONG_DATA=/data/thirdparty/kong
+MEP_CERTS_DIR=/home/EG-LDVS/mepserver
 
-chown eguser:eggroup /data/thirdparty/postgres
+mkdir -p ${POSTGRES_DATA}
 
-chmod 700 /data/thirdparty/postgres
+chown eguser:eggroup ${POSTGRES_DATA}
+
+chmod 700 ${POSTGRES_DATA}
 
 # create kong work dir
-mkdir -p /data/thirdparty/kong
+mkdir -p ${KONG_DATA}
 
-chown eguser:eggroup /data/thirdparty/kong
+chown eguser:eggroup ${KONG_DATA}
 
-chmod 700 /data/thirdparty/kong
+chmod 700 ${KONG_DATA}
 
 # create cert generation dir
-mkdir -p /home/EG-LDVS/mepserver
+mkdir -p ${MEP_CERTS_DIR}
 
-chown eguser:eggroup /home/EG-LDVS/mepserver
+chown eguser:eggroup ${MEP_CERTS_DIR}
 
-chmod 700 /home/EG-LDVS/mepserver
+chmod 700 ${MEP_CERTS_DIR}
 
 # create mep network
 docker network create mep-net
