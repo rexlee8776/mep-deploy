@@ -7,7 +7,7 @@ set -x
 
 grep "${KONG_HOST}" /etc/hosts > /dev/null
 if [ $? -ne 0 ]; then
-    echo '127.0.0.1 edgegallery.org' >> /etc/hosts
+    echo "$KONG_IP edgegallery.org" >> /etc/hosts
 fi
 
 
