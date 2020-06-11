@@ -104,7 +104,6 @@ docker run -d --name kong-service \
     -e "KONG_NGINX_HTTP_SSL_PREFER_SERVER_CIPHERS=on" \
     -v "${KONG_DATA_DIR}:/var/lib/kong/data" \
     -p 8443:8443 \
-    -p 8444:8444 \
     kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
 
 ## modify owner and mode of soft link
