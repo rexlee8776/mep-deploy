@@ -18,7 +18,6 @@ CERT_NAME=${CERT_NAME:-mepserver}
 
 KONG_HOST=edgegallery.org
 KONG_ADMIN_PORT=8444
-KONG_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kong-service)
 MEPSERVER_HOST=mepserver
 MEPSERVER_PORT=8088
 CACRT_PATH=${MEP_CERTS_DIR}/ca.crt
