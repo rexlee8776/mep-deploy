@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 set +x
 PG_DATA_DIR=/data/thirdparty/postgres
 KONG_DATA_DIR=/data/thirdparty/kong
@@ -33,3 +34,4 @@ AES_KEY_CONTENT=te9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaq
 PG_KONG_PW=kong
 PG_MEPAUTH_PW=mepauth
 PG_ADMIN_PW=admin
+set -o history

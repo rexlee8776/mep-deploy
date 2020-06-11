@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 # initial variable
 set +x
 source scripts/mep_vars.sh
@@ -23,3 +24,4 @@ docker run -itd --name mepauth -p 10443:10443 \
              -e "MEPAUTH_APIGW_PORT=8444"  \
              -e "MEPAUTH_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
              edgegallery/mepauth:latest $*
+set -o history

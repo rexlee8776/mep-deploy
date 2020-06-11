@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 # initial variables
 set +x
 source ./scripts/mep_vars.sh
@@ -29,3 +30,4 @@ chmod 700 ${MEP_CERTS_DIR}
 
 # create mep network
 docker network create mep-net
+set -o history

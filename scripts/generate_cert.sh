@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 # initial variables
 set +x
 source scripts/mep_vars.sh
@@ -38,3 +39,4 @@ rm jwt_privatekey
 # setup read permission
 chown eguser:eggroup ${MEP_CERTS_DIR}/*
 chmod 600 ${MEP_CERTS_DIR}/*
+set -o history

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 # initial variables
 set +x
 source scripts/mep_vars.sh
@@ -18,3 +19,4 @@ rm -rf ${MEP_CERTS_DIR}
 
 userdel eguser
 groupdel eggroup
+set -o history

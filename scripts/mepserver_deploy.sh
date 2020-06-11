@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 # initial variable
 set +x
 source scripts/mep_vars.sh
@@ -13,3 +14,4 @@ docker run -itd --name mepserver --network mep-net -e "SSL_ROOT=${MEPSERVER_SSL_
                                  -v ${MEP_CERTS_DIR}/mepserver_cert_pwd:${MEPSERVER_SSL_DIR}/cert_pwd \
                                  edgegallery/mep:latest
 
+set -o history

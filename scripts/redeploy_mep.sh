@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 set -x
 
 docker rm -f mepauth
@@ -17,4 +18,4 @@ sleep 5
 scripts/mepauth_deploy.sh -u mepauth -p mepauth -jwt te9Fmv%qaq
 
 scripts/check_env_status.sh
-
+set -o history

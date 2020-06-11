@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set +o history
 # initial variable
 set +x
 source scripts/mep_vars.sh
@@ -119,3 +120,4 @@ rm ${MEP_CERTS_DIR}/init.sql
 
 # check docker status
 docker ps -a |grep -E '(postgres-db|kong-service)'
+set -o history

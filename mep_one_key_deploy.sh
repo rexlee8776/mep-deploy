@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+set +o history
 #initial variables
 set +x
 source scripts/mep_vars.sh
@@ -20,3 +21,4 @@ sleep 5
 scripts/mepauth_deploy.sh -u mepauth -p ${PG_MEPAUTH_PW} -jwt ${JWT_PW}
 
 scripts/check_env_status.sh
+set -o history

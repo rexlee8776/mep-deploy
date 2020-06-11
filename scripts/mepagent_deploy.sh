@@ -2,6 +2,7 @@
 
 echo "MEP_IP should set be the host ip!"
 
+set +o history
 # initial variables
 set +x
 source scripts/mep_vars.sh
@@ -20,3 +21,4 @@ docker run -itd --name mepagent \
                 -v ${CACRT_PATH}:/etc/mepssl/ca.crt \
                 -v app_instance_info.yaml:/usr/app/conf/app_instance_info.yaml \
                 edgegallery/mep-agent:latest -ak ${ACCESS_KEY} -sk ${SECRET_KEY}
+set -o history
