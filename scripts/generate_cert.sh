@@ -30,6 +30,9 @@ echo -n ${AES_KEY_CONTENT} > aes_key_file
 
 # remove unnecessary key file
 rm ca.key
+rm ca.csr
+rm ca.srl
+rm mepserver_tls.csr
 rm jwt_privatekey
 
 # setup read permission
