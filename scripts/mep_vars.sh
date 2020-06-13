@@ -28,7 +28,7 @@ ACCESS_KEY=QVUJMSUMgS0VZLS0tLS0
 SECRET_KEY=DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOIRomRs5wyszoCR5R7AtVa28KT3lSc
 AES_KEY_PW=te9Fmv%qaq
 AES_KEY_CONTENT=te9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaq
-APP_INST_ID=79cbac9e-3e0e-4b5e-bfc2-1d3b20e3d1c8
+APP_INST_ID=5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 
 # pg database user pwd
 PG_KONG_PW=kong
