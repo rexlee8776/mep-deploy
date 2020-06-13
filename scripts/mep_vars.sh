@@ -30,7 +30,7 @@ AES_KEY_PW=te9Fmv%qaq
 AES_KEY_CONTENT=te9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaq
 
 # pg database user pwd
-PG_KONG_PW=kong%pass123
-PG_MEPAUTH_PW=mepauth%pass123
-PG_ADMIN_PW=admin%pass123
+PG_KONG_PW=kong%Pass123
+PG_MEPAUTH_PW=mepauth%Pass123
+PG_ADMIN_PW=admin%Pass123
 set -o history
