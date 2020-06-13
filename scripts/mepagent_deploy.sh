@@ -10,7 +10,6 @@ set -x
 
 # deploy mepagent
 docker run -itd --name mepagent \
-                --network=mep-net \
                 -e MEP_IP=10.151.154.36 \
                 -e MEP_APIGW_PORT=8443 \
                 -e MEP_SRV_ROUTE=mepserver \
