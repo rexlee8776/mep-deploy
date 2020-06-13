@@ -12,9 +12,9 @@ set -x
 docker run -itd --name mepagent \
                 --network=mep-net \
                 -e MEP_IP=10.151.154.36 \
-                -e MEP_AUTH_PORT=10443 \
                 -e MEP_APIGW_PORT=8443 \
-                -e MEP_SRV_ROUTE=mepssl \
+                -e MEP_SRV_ROUTE=mepserver \
+                -e MEP_AUTH_ROUTE=mepauth \
                 -e ENABLE_WAIT=true \
                 -e "CA_CERT=/etc/mepssl/ca.crt" \
                 -e "CA_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
