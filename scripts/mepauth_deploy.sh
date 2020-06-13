@@ -7,7 +7,7 @@ source scripts/mep_vars.sh
 set -x
 
 # deploy mepauth docker
-docker run -itd --name mepauth -p 10443:10443 \
+docker run -itd --name mepauth \
              --network mep-net \
              --link postgres-db:postgres-db \
              --link kong-service:kong-service \
