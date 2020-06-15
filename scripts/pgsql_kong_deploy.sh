@@ -38,9 +38,9 @@ docker run -d --name postgres-db \
                 -e "POSTGRES_INITDB_ARGS=--auth-local=password" \
                 -e "PGDATA=/var/lib/postgresql/data/pgdata" \
                 -v "${PG_DATA_DIR}:/var/lib/postgresql/data" \
-                -v "${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt" \
-                -v "${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/postgresql/data/server.key" \
-                -v "${MEP_CERTS_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql" \
+                -v "${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt:ro" \
+                -v "${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/postgresql/data/server.key:ro" \
+                -v "${MEP_CERTS_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql:ro" \
                 postgres:12.2 \
                 -c ssl=on \
                 -c ssl_cert_file=/var/lib/postgresql/data/server.crt \
@@ -79,11 +79,11 @@ docker run -d --name kong-service \
     --link mepserver:mepserver \
     --link mepauth:mepauth \
     --network=mep-net \
-    -v ${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/kong/data/kong.crt \
-    -v ${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/kong/data/kong.key \
-    -v ${MEP_CERTS_DIR}/ca.crt:/var/lib/kong/data/ca.crt \
-    -v ${KONG_PLUGIN_PATH}:/usr/local/share/lua/5.1/kong/plugins/appid-header \
-    -v ${KONG_CONF_PATH}:/etc/kong/kong.conf \
+    -v ${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/kong/data/kong.crt:ro \
+    -v ${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/kong/data/kong.key:ro \
+    -v ${MEP_CERTS_DIR}/ca.crt:/var/lib/kong/data/ca.crt:ro \
+    -v ${KONG_PLUGIN_PATH}:/usr/local/share/lua/5.1/kong/plugins/appid-header:ro \
+    -v ${KONG_CONF_PATH}:/etc/kong/kong.conf:ro \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
