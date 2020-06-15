@@ -3,6 +3,9 @@
 set +o history
 set -x
 
+rm -rf /data/thirdparty/postgres/*
+rm -rf /data/thirdparty/kong/*
+
 docker rm -f mepauth
 docker rm -f kong-service
 docker rm -f postgres-db

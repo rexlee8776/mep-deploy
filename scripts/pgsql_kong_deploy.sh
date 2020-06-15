@@ -77,6 +77,7 @@ docker run -d --name kong-service \
     --user=166:166 \
     --link postgres-db:postgres-db \
     --link mepserver:mepserver \
+    --link mepauth:mepauth \
     --network=mep-net \
     -v ${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/kong/data/kong.crt \
     -v ${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/kong/data/kong.key \
