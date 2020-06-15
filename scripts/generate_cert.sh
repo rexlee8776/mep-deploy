@@ -27,9 +27,6 @@ openssl genrsa -out jwt_privatekey 2048
 openssl rsa -in jwt_privatekey -pubout -out jwt_publickey
 openssl rsa -in jwt_privatekey -aes256 -passout pass:${AES_KEY_PW} -out jwt_encrypted_privatekey
 
-# generate aes key file
-echo -n ${AES_KEY_CONTENT} > aes_key_file
-
 # remove unnecessary key file
 rm ca.key
 rm ca.csr
