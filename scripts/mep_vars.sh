@@ -10,7 +10,7 @@ KONG_PLUGIN_PATH=/tmp/kong-conf/appid-header
 KONG_CONF_PATH=/tmp/kong-conf/kong.conf
 
 MEPAUTH_SSL_DIR=/usr/mep/ssl
-DOMAIN_NAME=edgegallery.org
+DOMAIN_NAME=edgegallery
 
 MEPSERVER_SSL_DIR=/usr/mep/ssl
 
