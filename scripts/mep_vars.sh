@@ -26,6 +26,7 @@ CACRT_PATH=${MEP_CERTS_DIR}/ca.crt
 
 # private input
 JWT_PW=te9Fmv%qaq
+MEP_CERTS_PW=te9Fmv%qaq
 ACCESS_KEY=QVUJMSUMgS0VZLS0tLS0
 SECRET_KEY=DXPb4sqElKhcHe07Kw5uorayETwId1JOjjOIRomRs5wyszoCR5R7AtVa28KT3lSc
 KEY_COMPONENT=te9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaqte9Fmv%qaq
