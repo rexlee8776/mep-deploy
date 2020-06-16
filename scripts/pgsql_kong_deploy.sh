@@ -32,6 +32,7 @@ chmod 600 ${MEP_CERTS_DIR}/init.sql
 docker run -d --name postgres-db \
                 --user=166:166 \
                 --network=mep-net \
+                -p 5432:5432 \
                 -e "POSTGRES_USER=admin" \
                 -e "POSTGRES_DB=kong" \
                 -e "POSTGRES_PASSWORD=${PG_ADMIN_PW}" \
@@ -105,8 +106,11 @@ docker run -d --name kong-service \
     -e "KONG_NGINX_HTTP_SSL_PROTOCOLS=TLSv1.2 TLSv1.3" \
     -e "KONG_NGINX_HTTP_SSL_PREFER_SERVER_CIPHERS=on" \
     -v "${KONG_DATA_DIR}:/var/lib/kong/data" \
-    -p 10.151.154.36:8443:8443 \
-    kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
+    -p 8443:8443 \
+    -p 8444:8444 \
+    -p 8001:8001 \
+    -p 8000:8000 \
+    kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8001, $ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
 
 ## modify owner and mode of soft link
 chown eguser:eggroup ${KONG_DATA_DIR}/ca.crt
