@@ -23,11 +23,6 @@ mkdir -p ${KONG_DATA_DIR}
 chown eguser:eggroup ${KONG_DATA_DIR}
 chmod 700 ${KONG_DATA_DIR}
 
-# create mepauth keys dir
-mkdir -p ${MEPAUTH_KEYS_DATA_DIR}
-chown eguser:eggroup ${MEPAUTH_KEYS_DATA_DIR}
-chmod 700 ${MEPAUTH_KEYS_DATA_DIR}
-
 # create cert generation dir
 mkdir -p ${MEP_CERTS_DIR}
 chown eguser:eggroup ${MEP_CERTS_DIR}
