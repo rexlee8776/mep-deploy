@@ -5,7 +5,6 @@ set +x
 PG_DATA_DIR=/data/thirdparty/postgres
 KONG_DATA_DIR=/data/thirdparty/kong
 MEP_CERTS_DIR=/home/EG-LDVS/mepserver
-MEPAUTH_KEYS_DATA_DIR=/data/mepauth/keys
 
 KONG_PLUGIN_PATH=/tmp/kong-conf/appid-header
 KONG_CONF_PATH=/tmp/kong-conf/kong.conf
