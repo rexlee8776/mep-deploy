@@ -88,10 +88,10 @@ docker run -d --name kong-service \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
     -e "KONG_PG_PASSWORD=${PG_KONG_PW}" \
-    -e "KONG_PROXY_ACCESS_LOG=/dev/stdout" \
-    -e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" \
-    -e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
-    -e "KONG_ADMIN_ERROR_LOG=/dev/stderr" \
+    -e "KONG_PROXY_ACCESS_LOG=/tmp/access.log" \
+    -e "KONG_ADMIN_ACCESS_LOG=/tmp/admin-access.log" \
+    -e "KONG_PROXY_ERROR_LOG=/tmp/proxy.log" \
+    -e "KONG_ADMIN_ERROR_LOG=/tmp/proxy-admin.log" \
     -e "KONG_PG_SSL=on" \
     -e "KONG_PG_SSL_VERIFY=on" \
     -e "KONG_LUA_SSL_TRUSTED_CERTIFICATE=/var/lib/kong/data/ca.crt" \
