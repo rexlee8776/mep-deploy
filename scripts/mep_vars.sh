@@ -6,6 +6,8 @@ PG_DATA_DIR=/data/thirdparty/postgres
 KONG_DATA_DIR=/data/thirdparty/kong
 MEP_CERTS_DIR=/home/EG-LDVS/mepserver
 
+OPENSSL_CNF_PATH=/etc/ssl/openssl.cnf
+
 KONG_PLUGIN_PATH=/tmp/kong-conf/appid-header
 KONG_CONF_PATH=/tmp/kong-conf/kong.conf
 
