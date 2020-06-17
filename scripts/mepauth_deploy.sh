@@ -6,9 +6,9 @@ set +x
 source scripts/mep_vars.sh
 set -x
 
-cp -r conf /tmp/
-chown -R eguser:eggroup /tmp/conf/
-chmod -R 700 /tmp/conf/
+cp -r mepauth-conf /tmp/
+chown -R eguser:eggroup /tmp/mepauth-conf/
+chmod -R 700 /tmp/mepauth-conf/
 
 # deploy mepauth docker
 docker run -itd --name mepauth \

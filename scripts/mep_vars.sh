@@ -11,7 +11,7 @@ OPENSSL_CNF_PATH=/etc/ssl/openssl.cnf
 KONG_PLUGIN_PATH=/tmp/kong-conf/appid-header
 KONG_CONF_PATH=/tmp/kong-conf/kong.conf
 
-MEP_CONF_PATH=/tmp/conf/mepauth.properties
+MEP_CONF_PATH=/tmp/mepauth-conf/mepauth.properties
 
 MEPAUTH_SSL_DIR=/usr/mep/ssl
 MEPAUTH_KEYS_DIR=/usr/mep/keys
