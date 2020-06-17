@@ -23,8 +23,7 @@ scripts/mepauth_deploy.sh
 
 sleep 5
 
-rm -f /home/root1/mep-deploy/conf/mepauth.properties
-rm -f /tmp/conf/mepauth.properties
+rm -f ${MEP_CONF_PATH}
 
 scripts/check_env_status.sh
 set -o history
