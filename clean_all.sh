@@ -10,6 +10,7 @@ docker rm -f mepserver
 docker rm -f mepauth
 docker rm -f kong-service
 docker rm -f postgres-db
+docker rm -f mepagent
 docker network rm mep-net
 
 # clean user and directory
