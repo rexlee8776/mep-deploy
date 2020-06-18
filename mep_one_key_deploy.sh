@@ -19,7 +19,11 @@ scripts/pgsql_kong_deploy.sh
 
 sleep 5
 
-scripts/mepauth_deploy.sh -u mepauth -p ${PG_MEPAUTH_PW} -jwt ${JWT_PW} -key ${KEY_COMPONENT} -appInsId ${APP_INST_ID} -ak ${ACCESS_KEY} -sk ${SECRET_KEY}
+scripts/mepauth_deploy.sh
+
+sleep 5
+
+rm -f ${MEP_CONF_PATH}
 
 scripts/check_env_status.sh
 set -o history
