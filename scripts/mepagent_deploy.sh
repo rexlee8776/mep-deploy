@@ -9,6 +9,8 @@ source scripts/mep_vars.sh
 set -x
 
 cp -r mepagent-conf /tmp/
+chown eguser:eggroup mepagent-conf/app_conf.yaml 	
+chmod 600 mepagent-conf/app_conf.yaml
 chown -R eguser:eggroup /tmp/mepagent-conf/
 chmod -R 700 /tmp/mepagent-conf/
 
