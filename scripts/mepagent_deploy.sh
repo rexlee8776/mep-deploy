@@ -16,8 +16,8 @@ docker run -itd --name mepagent \
                 -e ENABLE_WAIT=true \
                 -e "CA_CERT=/usr/mep/ssl/ca.crt" \
                 -e "CA_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
-                -v ${CACRT_PATH}:/etc/mepssl/ca.crt:ro \
-                -v app_instance_info.yaml:/usr/app/conf/app_instance_info.yaml:ro \
-                -v app_conf.yaml:/usr/app/conf/app_conf.yaml:ro \
+                -v ${CACRT_PATH}:/usr/mep/ssl/ca.crt:ro \
+                -v app_instance_info.yaml:/usr/mep/conf/app_instance_info.yaml:ro \
+                -v app_conf.yaml:/usr/mep/conf/app_conf.yaml:ro \
                 edgegallery/mep-agent:latest -ak ${ACCESS_KEY} -sk ${SECRET_KEY}
 set -o history
