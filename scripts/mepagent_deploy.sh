@@ -9,8 +9,6 @@ source scripts/mep_vars.sh
 set -x
 
 cp -r mepagent-conf /tmp/
-chown eguser:eggroup mepagent-conf/app_conf.yaml 	
-chmod 600 mepagent-conf/app_conf.yaml
 chown -R eguser:eggroup /tmp/mepagent-conf/
 chmod -R 700 /tmp/mepagent-conf/
 
@@ -24,7 +22,7 @@ docker run -itd --name mepagent \
                 -e "CA_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
                 -v ${CACRT_PATH}:/usr/mep/ssl/ca.crt:ro \
                 -v app_instance_info.yaml:/usr/mep/conf/app_instance_info.yaml:ro \
-                -v mepagent-conf/app_conf.yaml:/usr/mep/conf/app_conf.yaml:ro \
+                -v /tmp/mepagent-conf/app_conf.yaml:/usr/mep/conf/app_conf.yaml:ro \
                 -v ${MEPAGENT_CONF_PATH}:/usr/mep/mepagent.properties \
                 edgegallery/mep-agent:latest
 set -o history
