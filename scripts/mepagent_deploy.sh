@@ -10,8 +10,6 @@ set -x
 
 cp -r mepagent-conf /tmp/
 chown -R eguser:eggroup /tmp/mepagent-conf/
-chown eguser:eggroup mepagent-conf/app_conf.yaml 
-chmod 600 mepagent-conf/app_conf.yaml
 chmod -R 700 /tmp/mepagent-conf/
 
 # deploy mepagent
