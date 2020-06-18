@@ -20,7 +20,7 @@ docker run -itd --name mepauth \
              -v ${MEP_CERTS_DIR}/mepserver_tls.crt:${MEPAUTH_SSL_DIR}/server.crt:ro \
              -v ${MEP_CERTS_DIR}/mepserver_tls.key:${MEPAUTH_SSL_DIR}/server.key:ro \
              -v ${MEP_CERTS_DIR}/ca.crt:${MEPAUTH_SSL_DIR}/ca.crt:ro \
-             -v ${MEP_CONF_PATH}:/usr/mep/mepauth.properties \
+             -v ${MEPAUTH_CONF_PATH}:/usr/mep/mepauth.properties \
              -e "MEPAUTH_DB_NAME=mepauth" \
              -e "MEPAUTH_DB_HOST=postgres-db" \
              -e "MEPAUTH_DB_PORT=5432" \
