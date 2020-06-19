@@ -18,6 +18,7 @@ rm -rf ${KONG_DATA_DIR}
 rm -rf ${PG_DATA_DIR}
 rm -rf ${MEP_CERTS_DIR}
 rm -rf /tmp/mepauth-conf/
+rm -rf /tmp/mepagent-conf/
 
 userdel eguser
 groupdel eggroup
