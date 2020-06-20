@@ -1,3 +1,17 @@
+-- Copyright 2020 Huawei Technologies Co., Ltd.
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--     http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+
 local BasePlugin = require "kong.plugins.base_plugin"
 local jwt_decoder = require "kong.plugins.jwt.jwt_parser"
 
@@ -37,7 +51,7 @@ local function retrieve_token(conf)
 end
 
 
-local function add_app_id(conf)
+local function add_app_id_check_ip(conf)
   local token, err = retrieve_token(conf)
   if err then
     kong.log.err(err)
@@ -47,9 +61,17 @@ local function add_app_id(conf)
   local jwt, err = jwt_decoder:new(token)
 
   local claims = jwt.claims
-  
+
   local app_id = claims["sub"]
-  kong.log("****app_id=****XXXXXXXXXX", app_id)
+
+  -- check client ip same
+  local remote_addr = ngx.var.remote_addr
+
+  local client_ip = claims["clientip"]
+
+  if client_ip == "UNKNOWN_IP" or remote_addr ~= client_ip then
+    return false
+  end
 
   local set_header = kong.service.request.set_header
   local clear_header = kong.service.request.clear_header
@@ -60,10 +82,13 @@ end
 
 
 function AddAppIdHeaderHandler:access(conf)
-  local ok, err = add_app_id(conf)
+  local ok, err = add_app_id_check_ip(conf)
   if err then
     kong.log.err(err)
     return kong.response.exit(500, { message = "Unexpected error."})
+  end
+  if not ok then
+    return kong.response.exit(401, { message = "Unauthorized" })
   end
 end
 
