@@ -23,6 +23,7 @@ ALTER DATABASE template0 is_template false;
 ALTER DATABASE template1 is_template false;
 DROP DATABASE template0;
 DROP DATABASE template1;
+DROP DATABASE postgres;
 EOF
 
 chown eguser:eggroup ${MEP_CERTS_DIR}/init.sql
