@@ -45,7 +45,7 @@ local function retrieve_token()
     end
 
     if m and #m >0 then
-      return m[1]
+      return m
     end
   end
 end
@@ -58,8 +58,9 @@ local function add_app_id_check_ip()
     return kong.response.exit(500, { message = "Unexpected error." })
   end
 
-  local jwt, err = jwt_decoder:new(token)
-  token = nil
+  local jwt, err = jwt_decoder:new(token[1])
+  token[1] = nil
+  unpack(token)
   if err then
     kong.log.err(err)
     return kong.response.exit(500, { message = "Unexpected error."})
