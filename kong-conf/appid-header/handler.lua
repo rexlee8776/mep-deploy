@@ -27,7 +27,7 @@ AddAppIdHeaderHandler.VERSION  = "1.0.0"
 AddAppIdHeaderHandler.PRIORITY = 10
 
 
-local function retrieve_token(conf)
+local function retrieve_token()
   local request_headers = kong.request.get_headers()
   local token_header = request_headers["authorization"]
   if token_header then
@@ -51,14 +51,19 @@ local function retrieve_token(conf)
 end
 
 
-local function add_app_id_check_ip(conf)
-  local token, err = retrieve_token(conf)
+local function add_app_id_check_ip()
+  local token, err = retrieve_token()
   if err then
     kong.log.err(err)
     return kong.response.exit(500, { message = "Unexpected error." })
   end
 
   local jwt, err = jwt_decoder:new(token)
+  token = nil
+  if err then
+    kong.log.err(err)
+    return kong.response.exit(500, { message = "Unexpected error."})
+  end
 
   local claims = jwt.claims
 
@@ -82,7 +87,7 @@ end
 
 
 function AddAppIdHeaderHandler:access(conf)
-  local ok, err = add_app_id_check_ip(conf)
+  local ok, err = add_app_id_check_ip()
   if err then
     kong.log.err(err)
     return kong.response.exit(500, { message = "Unexpected error."})
