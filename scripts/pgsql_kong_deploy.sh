@@ -42,7 +42,7 @@ docker run -d --name postgres-db \
                 -v "${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt:ro" \
                 -v "${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/postgresql/data/server.key:ro" \
                 -v "${MEP_CERTS_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql:ro" \
-                postgres:12.2 \
+                postgres:12.3 \
                 -c ssl=on \
                 -c ssl_cert_file=/var/lib/postgresql/data/server.crt \
                 -c ssl_key_file=/var/lib/postgresql/data/server.key
