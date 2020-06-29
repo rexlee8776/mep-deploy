@@ -63,7 +63,7 @@ docker run --rm \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
     -e "KONG_PG_PASSWORD=${PG_KONG_PW}" \
-    kong:1.5.1-alpine kong migrations bootstrap
+    kong:2.0.4-alpine kong migrations bootstrap
 
 # run kong service
 sleep 5
@@ -108,7 +108,7 @@ docker run -d --name kong-service \
     -e "KONG_NGINX_HTTP_SSL_PREFER_SERVER_CIPHERS=on" \
     -v "${KONG_DATA_DIR}:/var/lib/kong/data" \
     -p 10.151.154.36:8443:8443 \
-    kong:1.5.1-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
+    kong:2.0.4-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
 
 ## modify owner and mode of soft link
 chown eguser:eggroup ${KONG_DATA_DIR}/ca.crt
