@@ -7,18 +7,12 @@ source scripts/mep_vars.sh
 set -x
 
 echo "CREATE USER kong WITH PASSWORD '${PG_KONG_PW}';" > ${MEP_CERTS_DIR}/init.sql
-echo "CREATE USER mepauth WITH PASSWORD '${PG_MEPAUTH_PW}';" >> ${MEP_CERTS_DIR}/init.sql
 
 cat >> ${MEP_CERTS_DIR}/init.sql << EOF
-CREATE DATABASE mepauth;
 REVOKE connect ON DATABASE kong FROM PUBLIC;
-REVOKE connect ON DATABASE mepauth FROM PUBLIC;
 GRANT ALL PRIVILEGES ON DATABASE kong TO admin;
-GRANT ALL PRIVILEGES ON DATABASE mepauth TO admin;
 GRANT ALL PRIVILEGES ON DATABASE kong TO kong;
-GRANT ALL PRIVILEGES ON DATABASE mepauth TO mepauth;
 GRANT connect ON DATABASE kong TO kong;
-GRANT connect ON DATABASE mepauth TO mepauth;
 ALTER DATABASE template0 is_template false;
 ALTER DATABASE template1 is_template false;
 DROP DATABASE template0;
