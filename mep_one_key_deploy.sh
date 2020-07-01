@@ -27,8 +27,5 @@ scripts/mepagent_deploy.sh
 
 sleep 5
 
-rm -f ${MEPAUTH_CONF_PATH}
-rm -f ${MEPAGENT_CONF_PATH}
-
 scripts/check_env_status.sh
 set -o history
