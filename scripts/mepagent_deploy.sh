@@ -11,6 +11,7 @@ set -x
 cp -r mepagent-conf /tmp/
 chown -R eguser:eggroup /tmp/mepagent-conf/
 chmod -R 700 /tmp/mepagent-conf/
+chmod -R 640 /tmp/mepagent-conf/app_conf.yaml
 
 # deploy mepagent
 docker run -itd --name mepagent \
