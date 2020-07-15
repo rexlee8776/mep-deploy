@@ -8,7 +8,7 @@ set -x
 
 cp -r mepauth-conf /tmp/
 chown -R eguser:eggroup /tmp/mepauth-conf/
-chmod -R 700 /tmp/mepauth-conf/
+chmod -R 640 /tmp/mepauth-conf/
 
 # deploy mepauth docker
 docker run -itd --name mepauth \
