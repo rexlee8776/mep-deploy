@@ -27,6 +27,7 @@ chmod 600 ${MEP_CERTS_DIR}/init.sql
 docker run -d --name postgres-db \
                 --user=166:166 \
                 --network=mep-net \
+                --cap-drop All \
                 -e "POSTGRES_USER=admin" \
                 -e "POSTGRES_DB=kong" \
                 -e "POSTGRES_PASSWORD=${PG_ADMIN_PW}" \
@@ -51,6 +52,7 @@ chmod 600 /data/thirdparty/postgres/server.key
 sleep 5
 docker run --rm \
     --user=166:166 \
+    --cap-drop All \
     --link postgres-db:postgres-db \
     --network=mep-net \
     -e "KONG_DATABASE=postgres" \
@@ -70,6 +72,7 @@ chmod 700 /tmp/kong-conf
 ## run kong docker
 docker run -d --name kong-service \
     --user=166:166 \
+    --cap-drop All \
     --link postgres-db:postgres-db \
     --link mepserver:mepserver \
     --link mepauth:mepauth \
