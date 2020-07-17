@@ -12,6 +12,7 @@ chmod -R 640 /tmp/mepauth-conf/
 
 # deploy mepauth docker
 docker run -itd --name mepauth \
+             --cap-drop All \
              --network mep-net \
              --link kong-service:kong-service \
              -v ${MEP_CERTS_DIR}/jwt_publickey:${MEPAUTH_KEYS_DIR}/jwt_publickey:ro \
