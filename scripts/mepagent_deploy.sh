@@ -15,6 +15,7 @@ chmod -R 640 /tmp/mepagent-conf/app_conf.yaml
 
 # deploy mepagent
 docker run -itd --name mepagent \
+                --cap-drop All \
                 -e MEP_IP=10.151.154.36 \
                 -e MEP_APIGW_PORT=8443 \
                 -e MEP_AUTH_ROUTE=mepauth \
