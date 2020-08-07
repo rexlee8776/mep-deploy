@@ -13,6 +13,6 @@ docker run -itd --name mepserver --network mep-net -e "SSL_ROOT=${MEPSERVER_SSL_
                                  -v ${MEP_CERTS_DIR}/mepserver_encryptedtls.key:${MEPSERVER_SSL_DIR}/server_key.pem:ro \
                                  -v ${MEP_CERTS_DIR}/ca.crt:${MEPSERVER_SSL_DIR}/trust.cer:ro \
                                  -v ${MEP_CERTS_DIR}/mepserver_cert_pwd:${MEPSERVER_SSL_DIR}/cert_pwd:ro \
-                                 edgegallery/mep:latest
+                                 "$REGISTRY_URL"edgegallery/mep:latest
 
 set -o history

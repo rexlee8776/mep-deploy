@@ -25,6 +25,6 @@ docker run -itd --name mepauth \
              -e "MEPAUTH_APIGW_HOST=kong-service" \
              -e "MEPAUTH_APIGW_PORT=8444"  \
              -e "MEPAUTH_CERT_DOMAIN_NAME=${DOMAIN_NAME}" \
-             edgegallery/mepauth:latest
+             "$REGISTRY_URL"edgegallery/mepauth:latest
 
 set -o history
