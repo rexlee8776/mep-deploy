@@ -40,4 +40,9 @@ APP_INST_ID=5abe4782-2c70-4e47-9a4e-0ee3a1a0fd1f
 PG_KONG_PW=kong-Pass123
 PG_MEPAUTH_PW=mepauth-Pass123
 PG_ADMIN_PW=admin-Pass123
+
+#configure MEP_IP
+MEP_IP="10.151.154.36"
+#config registry url [dont miss to include '/' at the end of url]
+REGISTRY_URL=""
 set -o history

@@ -17,7 +17,7 @@ chmod 600 /tmp/mepagent-conf/mepagent.properties
 # deploy mepagent
 docker run -itd --name mepagent \
                 --cap-drop All \
-                -e MEP_IP=10.151.154.36 \
+                -e MEP_IP=$MEP_IP \
                 -e MEP_APIGW_PORT=8443 \
                 -e MEP_AUTH_ROUTE=mepauth \
                 -e ENABLE_WAIT=true \
@@ -26,5 +26,5 @@ docker run -itd --name mepagent \
                 -v ${CACRT_PATH}:/usr/mep/ssl/ca.crt:ro \
                 -v /tmp/mepagent-conf/app_conf.yaml:/usr/mep/conf/app_conf.yaml:ro \
                 -v ${MEPAGENT_CONF_PATH}:/usr/mep/mepagent.properties \
-                edgegallery/mep-agent:latest
+                "$REGISTRY_URL"edgegallery/mep-agent:latest
 set -o history

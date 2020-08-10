@@ -37,7 +37,7 @@ docker run -d --name postgres-db \
                 -v "${MEP_CERTS_DIR}/mepserver_tls.crt:/var/lib/postgresql/data/server.crt:ro" \
                 -v "${MEP_CERTS_DIR}/mepserver_tls.key:/var/lib/postgresql/data/server.key:ro" \
                 -v "${MEP_CERTS_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql:ro" \
-                postgres:12.3 \
+                "$REGISTRY_URL"postgres:12.3 \
                 -c ssl=on \
                 -c ssl_cert_file=/var/lib/postgresql/data/server.crt \
                 -c ssl_key_file=/var/lib/postgresql/data/server.key
@@ -59,7 +59,7 @@ docker run --rm \
     -e "KONG_PG_HOST=postgres-db" \
     -e "KONG_PG_USER=kong" \
     -e "KONG_PG_PASSWORD=${PG_KONG_PW}" \
-    kong:2.0.4-alpine kong migrations bootstrap
+    "$REGISTRY_URL"kong:2.0.4-alpine kong migrations bootstrap
 
 # run kong service
 sleep 5
@@ -104,8 +104,8 @@ docker run -d --name kong-service \
     -e "KONG_NGINX_HTTP_SSL_PROTOCOLS=TLSv1.2 TLSv1.3" \
     -e "KONG_NGINX_HTTP_SSL_PREFER_SERVER_CIPHERS=on" \
     -v "${KONG_DATA_DIR}:/var/lib/kong/data" \
-    -p 10.151.154.36:8443:8443 \
-    kong:2.0.4-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
+    -p $MEP_IP:8443:8443 \
+    "$REGISTRY_URL"kong:2.0.4-alpine /bin/sh -c 'export ADDR=`hostname`;export KONG_ADMIN_LISTEN="$ADDR:8444 ssl";export KONG_PROXY_LISTEN="$ADDR:8443 ssl http2";./docker-entrypoint.sh kong docker-start'
 
 ## modify owner and mode of soft link
 chown eguser:eggroup ${KONG_DATA_DIR}/ca.crt
