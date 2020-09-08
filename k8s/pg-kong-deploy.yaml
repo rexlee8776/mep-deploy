@@ -1,0 +1,186 @@
+# kong deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apigw-kong
+  name: apigw-kong
+  namespace: mep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apigw-kong
+  template:
+    metadata:
+      labels:
+        app: apigw-kong
+    spec:
+      initContainers:
+        - name: check-db-ready
+          image: postgres:12.3
+          command: ['sh', '-c', 'until pg_isready -h pg-service -p 5432; do echo waiting for database; sleep 2; done;']
+        - name: kong-migrations
+          image: kong:2.0.4-alpine
+          env:
+            - name: KONG_DATABASE
+              value: postgres
+            - name: KONG_PG_HOST
+              value: pg-service
+            - name: KONG_PG_USER
+              value: kong
+            - name: KONG_PG_PASSWORD
+              value: kong-Pass123
+          command: ['sh', '-c', 'kong migrations bootstrap']
+      containers:
+        - name: kong-proxy
+          image: kong:2.0.4-alpine
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KONG_NGINX_WORKER_PROCESSES
+              value: "1"
+            - name: KONG_ADMIN_ACCESS_LOG
+              value: /dev/stdout
+            - name: KONG_ADMIN_ERROR_LOG
+              value: /dev/stderr
+            - name: KONG_ADMIN_ACCESS_LOG
+              value: /dev/stdout
+            - name: KONG_ADMIN_ERROR_LOG
+              value: /dev/stderr
+            - name: KONG_ADMIN_LISTEN
+              value: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+            - name: KONG_PROXY_LISTEN
+              value: 0.0.0.0:8000, 0.0.0.0:8443 ssl http2
+            - name: KONG_DATABASE
+              value: postgres
+            - name: KONG_PG_DATABASE
+              value: kong
+            - name: KONG_PG_HOST
+              value: pg-service
+            - name: KONG_PG_USER
+              value: kong
+            - name: KONG_PG_PASSWORD
+              value: kong-Pass123
+            - name: KONG_PROXY_ACCESS_LOG
+              value: /tmp/access.log
+            - name: KONG_ADMIN_ACCESS_LOG
+              value: /tmp/admin-access.log
+            - name: KONG_PROXY_ERROR_LOG
+              value: /tmp/proxy.log
+            - name: KONG_ADMIN_ERROR_LOG
+              value: /tmp/proxy-admin.log
+            - name: KONG_HEADERS
+              value: "off"
+          ports:
+            - containerPort: 8000
+              name: proxy
+              protocol: TCP
+            - containerPort: 8443
+              name: proxy-ssl
+              protocol: TCP
+            - containerPort: 8001
+              name: admin-api
+              protocol: TCP
+            - containerPort: 8444
+              name: admin-api-ssl
+              protocol: TCP
+
+# postgresql deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-deploy
+  namespace: mep
+  labels:
+    app: pg-deploy
+spec:
+  selector:
+    matchLabels:
+      app: pg-deploy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pg-deploy
+    spec:
+      containers:
+        - image: postgres:12.3
+          imagePullPolicy: IfNotPresent
+          name: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_DB
+              value: kong
+            - name: POSTGRES_PASSWORD
+              value: admin-Pass123
+            - name: POSTGRES_INITDB_ARGS
+              value: --auth-local=password
+            # - name: PGDATA
+            #   value: /var/lib/postgresql/data/pgdata
+
+          volumeMounts:
+            - name: pg-certs
+              mountPath: /etc/mep/ssl/
+              readOnly: true
+            - name: pg-init
+              mountPath: /docker-entrypoint-initdb.d/
+              readOnly: true
+      volumes:
+        - name: pg-certs
+          secret:
+            secretName: pg-secret
+            items:
+              - key: server.crt
+                path: server.crt
+                mode: 0644
+              - key: server.key
+                path: server.key
+                mode: 0644
+        - name: pg-init
+          secret:
+            secretName: pg-init-sql
+            items:
+              - key: init.sql
+                path: init.sql
+                mode: 0644
+
+# postgres servcie
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-service
+  namespace: mep
+spec:
+  selector:
+    app: pg-deploy
+  type: NodePort
+  ports:
+    - port: 5432
+      nodePort: 31330
+
+# kong service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-service
+  namespace: mep
+spec:
+  selector:
+    app: apigw-kong
+  type: NodePort
+  ports:
+    - port: 8000
+      name: proxy
+    - port: 8443
+      name: proxy-ssl
+    - port: 8001
+      name: admin-api
+    - port: 8444
+      name: admin-api-ssl
