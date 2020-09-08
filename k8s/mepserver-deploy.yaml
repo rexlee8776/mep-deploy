@@ -1,0 +1,62 @@
+# mepserver deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mepserver-deploy
+  namespace: mep
+  labels:
+    app: mepserver-deploy
+spec:
+  selector:
+    matchLabels:
+      app: mepserver-deploy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mepserver-deploy
+    spec:
+      containers:
+        - image: swr.ap-southeast-1.myhuaweicloud.com/edgegallery/mep:latest
+          imagePullPolicy: IfNotPresent
+          name: mepserver
+          tty: true
+          args: ['sh']
+          ports:
+            - containerPort: 8088
+          env:
+            - name: SSL_ROOT
+              value: /usr/mep/ssl
+          volumeMounts:
+            - name: mep-certs
+              mountPath: /usr/mep/ssl/
+              readOnly: true
+      volumes:
+        - name: mep-certs
+          secret:
+            secretName: mep-ssl
+            items:
+              - key: server.cer
+                path: server.cer
+                mode: 0644
+              - key: server_key.pem
+                path: server_key.pem
+                mode: 0644
+              - key: trust.cer
+                path: trust.cer
+                mode: 0644
+
+# mepserver servcie
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mepserver-service
+  namespace: mep
+spec:
+  selector:
+    app: mepserver-deploy
+  type: NodePort
+  ports:
+    - port: 8088
