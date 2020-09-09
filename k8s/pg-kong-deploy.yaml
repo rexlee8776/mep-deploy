@@ -31,7 +31,10 @@ spec:
             - name: KONG_PG_USER
               value: kong
             - name: KONG_PG_PASSWORD
-              value: kong-Pass123
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secret
+                  key: kong_pg_pwd
           command: ['sh', '-c', 'kong migrations bootstrap']
       containers:
         - name: kong-proxy
@@ -117,11 +120,12 @@ spec:
             - name: POSTGRES_DB
               value: kong
             - name: POSTGRES_PASSWORD
-              value: admin-Pass123
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secret
+                  key: pg_admin_pwd
             - name: POSTGRES_INITDB_ARGS
               value: --auth-local=password
-            # - name: PGDATA
-            #   value: /var/lib/postgresql/data/pgdata
 
           volumeMounts:
             - name: pg-certs
