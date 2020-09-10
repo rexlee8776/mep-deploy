@@ -64,7 +64,10 @@ spec:
             - name: KONG_PG_USER
               value: kong
             - name: KONG_PG_PASSWORD
-              value: kong-Pass123
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secret
+                  key: kong_pg_pwd
             - name: KONG_PROXY_ACCESS_LOG
               value: /tmp/access.log
             - name: KONG_ADMIN_ACCESS_LOG

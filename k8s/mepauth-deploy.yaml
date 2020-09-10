@@ -24,7 +24,7 @@ spec:
           tty: true
           args: ['sh']
           ports:
-            - containerPort: 8080
+            - containerPort: 10443
           env:
             - name: MEPAUTH_APIGW_HOST
               value: kong-service
@@ -32,15 +32,17 @@ spec:
               value: "8444"
             - name: MEPAUTH_CERT_DOMAIN_NAME
               value: edgegallery
-            - name: POSTGRES_PASSWORD
-              value: admin-Pass123
           volumeMounts:
             - name: mepauth-certs
               mountPath: /usr/mep/ssl/
               readOnly: true
-            # - name: mepauth-jwt
-            #   mountPath: /usr/mep/keys/
-            #   readOnly: true
+            - name: mepauth-jwt
+              mountPath: /usr/mep/keys/
+              readOnly: true
+          volumeMounts:
+            - name: mepauth-properties
+              mountPath: /usr/mep/mprop/
+              readOnly: true
       volumes:
         - name: mepauth-certs
           secret:
@@ -55,16 +57,23 @@ spec:
               - key: ca.crt
                 path: ca.crt
                 mode: 0644
-        # - name: mepauth-jwt
-        #   secret:
-        #     secretName: mepauth-secret
-        #     items:
-        #       - key: jwt_publickey
-        #         path: jwt_publickey
-        #         mode: 0644
-        #       - key: jwt_encrypted_privatekey
-        #         path: jwt_encrypted_privatekey
-        #         mode: 0644
+        - name: mepauth-jwt
+          secret:
+            secretName: mepauth-secret
+            items:
+              - key: jwt_publickey
+                path: jwt_publickey
+                mode: 0644
+              - key: jwt_encrypted_privatekey
+                path: jwt_encrypted_privatekey
+                mode: 0644
+        - name: mepauth-properties
+          secret:
+            secretName: mepauth-secret
+            items:
+              - key: mepauth.properties
+                path: mepauth.properties
+                mode: 0644
 
 # mepauth servcie
 ---
@@ -78,4 +87,4 @@ spec:
     app: mepauth-deploy
   type: NodePort
   ports:
-    - port: 8080
+    - port: 10443
