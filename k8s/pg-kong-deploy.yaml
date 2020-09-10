@@ -43,14 +43,6 @@ spec:
           env:
             - name: KONG_NGINX_WORKER_PROCESSES
               value: "1"
-            - name: KONG_ADMIN_ACCESS_LOG
-              value: /dev/stdout
-            - name: KONG_ADMIN_ERROR_LOG
-              value: /dev/stderr
-            - name: KONG_ADMIN_ACCESS_LOG
-              value: /dev/stdout
-            - name: KONG_ADMIN_ERROR_LOG
-              value: /dev/stderr
             - name: KONG_ADMIN_LISTEN
               value: 0.0.0.0:8001, 0.0.0.0:8444 ssl
             - name: KONG_PROXY_LISTEN
@@ -78,6 +70,13 @@ spec:
               value: /tmp/proxy-admin.log
             - name: KONG_HEADERS
               value: "off"
+          volumeMounts:
+            - name: kong-conf
+              mountPath: /etc/kong/
+            - name: kong-certs
+              mountPath: /var/lib/kong/data/
+            - name: kong-plugins
+              mountPath: /usr/local/share/lua/5.1/kong/plugins/appid-header/
           ports:
             - containerPort: 8000
               name: proxy
@@ -91,6 +90,37 @@ spec:
             - containerPort: 8444
               name: admin-api-ssl
               protocol: TCP
+      volumes:
+        - name: kong-conf
+          secret:
+            secretName: kong-secret
+            items:
+              - key: kong.conf
+                path: kong.conf
+                mode: 0644
+        - name: kong-certs
+          secret:
+            secretName: mepauth-secret
+            items:
+              - key: server.crt
+                path: kong.crt
+                mode: 0644
+              - key: server.key
+                path: kong.key
+                mode: 0644
+              - key: ca.crt
+                path: ca.crt
+                mode: 0644
+        - name: kong-plugins
+          secret:
+            secretName: kong-secret
+            items:
+              - key: handler.lua
+                path: handler.lua
+                mode: 0644
+              - key: schema.lua
+                path: schema.lua
+                mode: 0644
 
 # postgresql deployment
 ---
@@ -166,10 +196,9 @@ metadata:
 spec:
   selector:
     app: pg-deploy
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 5432
-      nodePort: 31330
 
 # kong service
 ---
@@ -181,13 +210,22 @@ metadata:
 spec:
   selector:
     app: apigw-kong
-  type: NodePort
+  type: ClusterIP
   ports:
-    - port: 8000
-      name: proxy
-    - port: 8443
-      name: proxy-ssl
-    - port: 8001
-      name: admin-api
     - port: 8444
       name: admin-api-ssl
+# kong proxy service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-proxy-svc
+  namespace: mep
+spec:
+  selector:
+    app: apigw-kong
+  type: NodePort
+  ports:
+    - port: 8443
+      nodePort: 30443
+      name: kong-proxy-port

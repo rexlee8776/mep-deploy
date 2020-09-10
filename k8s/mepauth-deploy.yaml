@@ -21,8 +21,6 @@ spec:
         - image: swr.ap-southeast-1.myhuaweicloud.com/edgegallery/mepauth:latest
           imagePullPolicy: IfNotPresent
           name: mepauth
-          tty: true
-          args: ['sh']
           ports:
             - containerPort: 10443
           env:
@@ -39,7 +37,6 @@ spec:
             - name: mepauth-jwt
               mountPath: /usr/mep/keys/
               readOnly: true
-          volumeMounts:
             - name: mepauth-properties
               mountPath: /usr/mep/mprop/
               readOnly: true
@@ -85,6 +82,6 @@ metadata:
 spec:
   selector:
     app: mepauth-deploy
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 10443

@@ -57,6 +57,6 @@ metadata:
 spec:
   selector:
     app: mepserver-deploy
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 8088
